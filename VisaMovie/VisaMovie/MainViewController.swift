@@ -16,6 +16,7 @@ class MainViewController: UIViewController {
     let movieListView = MovieListView()
     var selectedGenre : MovieGenre?
     
+    var noResultLabel = UILabel()
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -30,6 +31,9 @@ class MainViewController: UIViewController {
         
         movieListView.delegate = self
         view.addSubview(movieListView)
+        
+        noResultLabel.withText("No movies found.").withFontHeletica(16).textCentered().withTextColor(UIColor.defaultBlack())
+        noResultLabel.frame = CGRectMake(0, 100, view.frame.size.width, 30)
         
         sendSearchNetTask()
     }
@@ -61,6 +65,12 @@ class MainViewController: UIViewController {
             if let data = responseObject as? NSDictionary {
                 self.movieListView.movieInfoList = SearchMovieNetTask.parseResultToMovieInfoList(data)
                 self.movieListView.reloadData()
+                
+                if self.movieListView.movieInfoList.count == 0 {
+                    self.view.addSubview(self.noResultLabel)
+                }else{
+                    self.noResultLabel.removeFromSuperview()
+                }
             }
             MBProgressHUD.hideHUDForView(self.view, animated: true)
         }
@@ -68,11 +78,10 @@ class MainViewController: UIViewController {
             print("SearchMovieNetTask failed")
             print(error.description)
             MBProgressHUD.hideHUDForView(self.view, animated: true)
-            MBProgressHUD.showHUDAddedTo(self.view, text: "Sorry has errors", duration: 1)
+            MBProgressHUD.showHUDAddedTo(self.view, text: "Sorry, please try later", duration: 1)
         }
         
         NetWorkHandler.sharedInstance.sendNetTask(one)
-        
     }
     
     func checkYearFormat(input : String) -> Int {

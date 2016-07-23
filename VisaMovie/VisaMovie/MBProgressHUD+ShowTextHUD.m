@@ -17,7 +17,7 @@
     hud.mode = MBProgressHUDModeText;
     hud.removeFromSuperViewOnHide = YES;
     hud.labelText = text;
-    hud.yOffset = 100 * kIphoneHeightScale;;
+    hud.yOffset = - 20 * kIphoneHeightScale;;
     [view addSubview:hud];
     [hud show:animated];
     [hud hide:animated afterDelay:1];
@@ -32,7 +32,7 @@
     hud.mode = MBProgressHUDModeText;
     hud.removeFromSuperViewOnHide = YES;
     hud.labelText = text;
-    hud.yOffset = 100 * kIphoneHeightScale;
+    hud.yOffset = - 20 * kIphoneHeightScale;
     [view addSubview:hud];
     [hud show:true];
     hud.removeFromSuperViewOnHide = true;

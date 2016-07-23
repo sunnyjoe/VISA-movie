@@ -85,7 +85,7 @@ class MovieInfoViewController: UIViewController {
             print("MovieTrailerNetTask failed")
             print(error.description)
             MBProgressHUD.hideHUDForView(self.view, animated: true)
-            MBProgressHUD.showHUDAddedTo(self.view, text: "Sorry has errors", duration: 1)
+            MBProgressHUD.showHUDAddedTo(self.view, text: "Sorry, please try later", duration: 1)
         }
         NetWorkHandler.sharedInstance.sendNetTask(vNetTask)
     }
@@ -106,7 +106,7 @@ class MovieInfoViewController: UIViewController {
             print("MovieTrailerNetTask failed")
             print(error.description)
             MBProgressHUD.hideHUDForView(self.view, animated: true)
-            MBProgressHUD.showHUDAddedTo(self.view, text: "Sorry has errors", duration: 1)
+            MBProgressHUD.showHUDAddedTo(self.view, text: "Sorry, please try later", duration: 1)
         }
         NetWorkHandler.sharedInstance.sendNetTask(dNetTask)
     }
