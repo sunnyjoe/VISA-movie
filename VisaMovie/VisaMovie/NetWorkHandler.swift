@@ -9,6 +9,7 @@
 import UIKit
 
 let OMDBBaseURL = "http://api.themoviedb.org/3/"
+let OMDBAPIKey = "48b76c860a67d611af57a22d6126395a"
 
 class NetWorkHandler: NSObject {
     static let sharedInstance = NetWorkHandler()
@@ -26,13 +27,14 @@ class NetWorkHandler: NSObject {
     
     func sendNetTask(task : BaseNetTask){
         var httpManager = httpQueryStringManager
+        let wholeURL = task.uri() + "?api_key=" + OMDBAPIKey
         
         if task.method() == HTTPTaskMethod.Post {
             httpManager = httpJSONManager
             
             let files = task.files()
             if files != nil && files!.count > 0{
-                httpManager.POST(task.uri(), parameters: task.query(), constructingBodyWithBlock: { (formData: AFMultipartFormData!) -> Void in
+                httpManager.POST(wholeURL, parameters: task.query(), constructingBodyWithBlock: { (formData: AFMultipartFormData!) -> Void in
                     let dicFiles = files! as NSDictionary
                     let allKeys = dicFiles.allKeys as! [String]
                     for name in allKeys {
@@ -41,10 +43,10 @@ class NetWorkHandler: NSObject {
                     }
                     }, success: task.success, failure: task.failed)
             }else{
-                httpManager.POST(task.uri(), parameters: task.query(), success: task.success, failure: task.failed)
+                httpManager.POST(wholeURL, parameters: task.query(), success: task.success, failure: task.failed)
             }
         }else{
-            httpManager.GET(task.uri(), parameters: task.query(), success: task.success, failure: task.failed)
+            httpManager.GET(wholeURL, parameters: task.query(), success: task.success, failure: task.failed)
         }
         
     }

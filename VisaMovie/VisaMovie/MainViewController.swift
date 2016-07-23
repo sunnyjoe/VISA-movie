@@ -9,7 +9,8 @@
 import UIKit
 
 class MainViewController: UIViewController {
-
+    var movieGenreList = [MovieGenre]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -17,13 +18,8 @@ class MainViewController: UIViewController {
         
         let one = GenreListNetTask()
         one.success = {(task : NSURLSessionDataTask, responseObject : AnyObject?) -> Void in
-            do {
-                let data = responseObject as! NSDictionary
-               // let jsonObject = NSString(data: data, encoding: NSUTF8StringEncoding)
-                print("json: \(data)")
-                // use jsonObject here
-            } catch {
-                print("json error")
+            if let data = responseObject as? NSDictionary {
+                self.movieGenreList = GenreListNetTask.parseResultToGenreList(data)
             }
             
         }
