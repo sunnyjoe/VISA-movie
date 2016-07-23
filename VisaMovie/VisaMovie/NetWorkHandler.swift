@@ -30,6 +30,18 @@ class NetWorkHandler: NSObject {
         var httpManager = httpQueryStringManager
         let wholeURL = task.uri() + "?api_key=" + OMDBAPIKey
         
+        let successWrapper = {(wtask : NSURLSessionDataTask, wresponse : AnyObject?) -> Void in
+            dispatch_async(dispatch_get_main_queue()) {
+                task.success(wtask, wresponse)
+            }
+        }
+        let failedWrapper = {(wtask : NSURLSessionDataTask?, werror : NSError) -> Void in
+            dispatch_async(dispatch_get_main_queue()) {
+                task.failed(wtask, werror)
+            }
+        }
+        
+        
         if task.method() == HTTPTaskMethod.Post {
             httpManager = httpJSONManager
             
@@ -42,12 +54,12 @@ class NetWorkHandler: NSObject {
                         let theData = dicFiles[name] as! NSData
                         formData.appendPartWithFileData(theData, name: name, fileName: name, mimeType: "image/png")
                     }
-                    }, success: task.success, failure: task.failed)
+                    }, success: successWrapper, failure: failedWrapper)
             }else{
-                httpManager.POST(wholeURL, parameters: task.query(), success: task.success, failure: task.failed)
+                httpManager.POST(wholeURL, parameters: task.query(), success: successWrapper, failure: failedWrapper)
             }
         }else{
-            httpManager.GET(wholeURL, parameters: task.query(), success: task.success, failure: task.failed)
+            httpManager.GET(wholeURL, parameters: task.query(), success: successWrapper, failure: failedWrapper)
         }
         
     }

@@ -18,20 +18,13 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-        
-     //   title = "Moview Explore"
-        
-        let one = SearchMovieNetTask()
-        one.yearRelased = 2000
-        one.genre = 18
-        
+        let one = GenreListNetTask()
         one.success = {(task : NSURLSessionDataTask, responseObject : AnyObject?) -> Void in
              print(responseObject)
-//            if let data = responseObject as? NSDictionary {
-//                self.movieGenreList = GenreListNetTask.parseResultToGenreList(data)
-//            }
-            
+            if let data = responseObject as? NSDictionary {
+                self.movieGenreList = GenreListNetTask.parseResultToGenreList(data)
+                self.resetGenreList()
+            }
         }
         one.failed = {(task : NSURLSessionDataTask?, error : NSError) -> Void in
             print("failed")
@@ -47,7 +40,26 @@ class MainViewController: UIViewController {
     }
     
     func searchBtnDidTapped(){
+        let one = SearchMovieNetTask()
+        if let tmp = yearTF.text{
+            one.yearRelased = Int(tmp)
+        }
+        one.genre = 18
         
+        one.success = {(task : NSURLSessionDataTask, responseObject : AnyObject?) -> Void in
+            print(responseObject)
+            //            if let data = responseObject as? NSDictionary {
+            //                self.movieGenreList = GenreListNetTask.parseResultToGenreList(data)
+            //            }
+            
+        }
+        one.failed = {(task : NSURLSessionDataTask?, error : NSError) -> Void in
+            print("failed")
+            print(error.description)
+        }
+        
+        NetWorkHandler.sharedInstance.sendNetTask(one)
+
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -79,7 +91,7 @@ extension MainViewController{
         yearTF.layer.borderWidth = 0.5
         containView.addSubview(yearTF)
         
-        let searchBtn = UIButton(frame : CGRectMake(290, 20, 55, 44))
+        let searchBtn = UIButton(frame : CGRectMake(290, 20, 60, 44))
         searchBtn.setTitleColor(UIColor.blackColor(), forState: .Normal)
         searchBtn.setTitle("Search", forState: .Normal)
         containView.addSubview(searchBtn)
@@ -87,6 +99,10 @@ extension MainViewController{
     }
     
     func genreBtnDidTapped() {
+        
+    }
+    
+    func resetGenreList(){
         
     }
 }
