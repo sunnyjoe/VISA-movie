@@ -31,7 +31,7 @@ class MainViewController: UIViewController {
         movieListView.delegate = self
         view.addSubview(movieListView)
         
-        searchBtnDidTapped()
+        sendSearchNetTask()
     }
     
     func movieListViewDidSelectMovie(movieInfo: MovieInfo, listView: MovieListView) {
@@ -39,14 +39,17 @@ class MainViewController: UIViewController {
         self.navigationController?.pushViewController(infoVC, animated: true)
     }
     
-    func searchBtnDidTapped(){
+    func sendSearchNetTask(){
         yearTF.resignFirstResponder()
         
         let one = SearchMovieNetTask()
         if let tmp = yearTF.text{
-            let n = tmp.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-            if Int(n) > 0{
-                one.yearRelased = Int(tmp)
+            let year = checkYearFormat(tmp)
+            if year > 0{
+                one.yearRelased = year
+            }else{
+                MBProgressHUD.showHUDAddedTo(self.view, text: "Check Year Format.", duration: 1)
+                return
             }
         }
         if let tmp = selectedGenre{
@@ -65,10 +68,31 @@ class MainViewController: UIViewController {
             print("SearchMovieNetTask failed")
             print(error.description)
             MBProgressHUD.hideHUDForView(self.view, animated: true)
+            MBProgressHUD.showHUDAddedTo(self.view, text: "Sorry has errors", duration: 1)
         }
         
         NetWorkHandler.sharedInstance.sendNetTask(one)
         
+    }
+    
+    func checkYearFormat(input : String) -> Int {
+        let notDigits = NSCharacterSet.decimalDigitCharacterSet().invertedSet
+        let n = input.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+
+        if let _ = n.rangeOfCharacterFromSet(notDigits){
+            return 0
+        }else{
+            if Int(n) > 2100 {
+                return 0
+            }
+        }
+        return Int(n)!
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        sendSearchNetTask()
+        return true
     }
     
     func genreBtnDidTapped() {
@@ -78,6 +102,7 @@ class MainViewController: UIViewController {
         }else{
             genreListView.hideAnimation()
         }
+        yearTF.resignFirstResponder()
     }
     
     func resetGenreList(movieGenreList : [MovieGenre]){
@@ -94,11 +119,18 @@ class MainViewController: UIViewController {
             genreBtn.setTitle("All", forState: .Normal)
         }
         genreBtnDidTapped()
+        sendSearchNetTask()
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBarHidden = true
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        yearTF.resignFirstResponder()
     }
 }
 
@@ -135,16 +167,12 @@ extension MainViewController: GenreListViewDelegate, UITextFieldDelegate, MovieL
         let searchBtn = UIButton(frame : CGRectMake(view.frame.size.width - 20 - 40, 20, 44, 44))
         searchBtn.withImage(UIImage(named: "SearchIcon"))
         containView.addSubview(searchBtn)
-        searchBtn.addTarget(self, action: #selector(searchBtnDidTapped), forControlEvents: .TouchUpInside)
+        searchBtn.addTarget(self, action: #selector(sendSearchNetTask), forControlEvents: .TouchUpInside)
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         movieListView.frame = CGRectMake(0, 64, view.frame.size.width, view.frame.size.height - 64)
     }
-    
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
+
 }

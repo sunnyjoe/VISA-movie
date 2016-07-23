@@ -44,6 +44,7 @@ class MovieInfoViewController: UIViewController {
         scrollView.addSubview(textInfoView)
         scrollView.addSubview(borderV)
         
+        ytPlayer.backgroundColor = UIColor.defaultBlack()
         view.addSubview(ytPlayer)
         ytPlayer.frame = CGRectMake(view.frame.size.width - 200, view.frame.size.height - 140, 200, 140)
         ytPlayer.hidden = true
@@ -74,6 +75,8 @@ class MovieInfoViewController: UIViewController {
                 let video = MovieVideosNetTask.parseResultToMovieVideoList(data)
                 if video.count > 0{
                     self.ytPlayer.loadWithVideoId(video[0].key)
+                    self.ytPlayer.hidden = false
+                    self.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 23 + 140, 0)
                 }
             }
             MBProgressHUD.hideHUDForView(self.view, animated: true)
@@ -82,6 +85,7 @@ class MovieInfoViewController: UIViewController {
             print("MovieTrailerNetTask failed")
             print(error.description)
             MBProgressHUD.hideHUDForView(self.view, animated: true)
+            MBProgressHUD.showHUDAddedTo(self.view, text: "Sorry has errors", duration: 1)
         }
         NetWorkHandler.sharedInstance.sendNetTask(vNetTask)
     }
@@ -95,8 +99,6 @@ class MovieInfoViewController: UIViewController {
             if let data = responseObject as? NSDictionary {
                 self.movieInfo = MovieDetailNetTask.parseResultToMovieInfo(data)
                 self.resetUI()
-                self.ytPlayer.hidden = false
-                self.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 23 + 140, 0)
             }
             MBProgressHUD.hideHUDForView(self.view, animated: true)
         }
@@ -104,6 +106,7 @@ class MovieInfoViewController: UIViewController {
             print("MovieTrailerNetTask failed")
             print(error.description)
             MBProgressHUD.hideHUDForView(self.view, animated: true)
+            MBProgressHUD.showHUDAddedTo(self.view, text: "Sorry has errors", duration: 1)
         }
         NetWorkHandler.sharedInstance.sendNetTask(dNetTask)
     }
@@ -115,6 +118,9 @@ class MovieInfoViewController: UIViewController {
         }
         if let tmp = movieInfo.backdropUrl{
             banners.append(tmp)
+        }
+        if banners.count == 0 {
+            banners.append("http://www.bingeu.com/posters/placeholder.png")
         }
         bannerView.setScrollImages(banners)
         
@@ -140,7 +146,11 @@ class MovieInfoViewController: UIViewController {
         if let cN = movieInfo.companyName{
             textInfoView.companyLabel.text = "Company: " + cN
         }
-        textInfoView.overviewLabel.text = movieInfo.overview
+        if let tmp = movieInfo.overview{
+            textInfoView.overviewLabel.text = tmp
+        }else{
+            textInfoView.overviewLabel.text = "Not Available."
+        }
         
         let height = textInfoView.getViewHeight()
         textInfoView.frame = CGRectMake(0, textInfoView.frame.origin.y, scrollView.frame.size.width, height)

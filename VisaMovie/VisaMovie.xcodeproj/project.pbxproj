@@ -30,6 +30,7 @@
 		0F775DB11D435B6E009B40CF /* MovieInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F775DB01D435B6E009B40CF /* MovieInfoView.swift */; };
 		0F775DB31D4361C5009B40CF /* DataContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F775DB21D4361C5009B40CF /* DataContainer.swift */; };
 		0F775DB71D438CBB009B40CF /* UIView+Mozat.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F775DB61D438CBB009B40CF /* UIView+Mozat.m */; };
+		0F775DBA1D43A872009B40CF /* MBProgressHUD+ShowTextHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F775DB91D43A872009B40CF /* MBProgressHUD+ShowTextHUD.m */; };
 		EC03B22FD14D640DEDADC042 /* Pods_VisaMovie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9C089951048AA46C4D9B20E /* Pods_VisaMovie.framework */; };
 /* End PBXBuildFile section */
 
@@ -64,6 +65,8 @@
 		0F775DB21D4361C5009B40CF /* DataContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataContainer.swift; sourceTree = "<group>"; };
 		0F775DB51D438CBB009B40CF /* UIView+Mozat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Mozat.h"; sourceTree = "<group>"; };
 		0F775DB61D438CBB009B40CF /* UIView+Mozat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Mozat.m"; sourceTree = "<group>"; };
+		0F775DB81D43A872009B40CF /* MBProgressHUD+ShowTextHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+ShowTextHUD.h"; sourceTree = "<group>"; };
+		0F775DB91D43A872009B40CF /* MBProgressHUD+ShowTextHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+ShowTextHUD.m"; sourceTree = "<group>"; };
 		564B78DC1059D3AE2BAABDD5 /* Pods-VisaMovie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VisaMovie.release.xcconfig"; path = "Pods/Target Support Files/Pods-VisaMovie/Pods-VisaMovie.release.xcconfig"; sourceTree = "<group>"; };
 		B9C089951048AA46C4D9B20E /* Pods_VisaMovie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VisaMovie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD547655DE96E3CAB34B4521 /* Pods-VisaMovie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VisaMovie.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VisaMovie/Pods-VisaMovie.debug.xcconfig"; sourceTree = "<group>"; };
@@ -188,6 +191,8 @@
 			isa = PBXGroup;
 			children = (
 				0F775DAE1D4354AD009B40CF /* ScrollableBannerView.swift */,
+				0F775DB81D43A872009B40CF /* MBProgressHUD+ShowTextHUD.h */,
+				0F775DB91D43A872009B40CF /* MBProgressHUD+ShowTextHUD.m */,
 				0F775DA71D4339F8009B40CF /* UIColor+MOAdditions.h */,
 				0F775DA81D4339F8009B40CF /* UIColor+MOAdditions.m */,
 				0F775DB51D438CBB009B40CF /* UIView+Mozat.h */,
@@ -350,6 +355,7 @@
 				0F775DAF1D4354AD009B40CF /* ScrollableBannerView.swift in Sources */,
 				0F775DB31D4361C5009B40CF /* DataContainer.swift in Sources */,
 				0F775D9F1D432CF7009B40CF /* MovieInfoViewController.swift in Sources */,
+				0F775DBA1D43A872009B40CF /* MBProgressHUD+ShowTextHUD.m in Sources */,
 				0F775D931D430CB7009B40CF /* SearchMovieNetTask.swift in Sources */,
 				0F775D9D1D4328A3009B40CF /* MoviewTableViewCell.swift in Sources */,
 				0F775D9B1D43283E009B40CF /* MovieListView.swift in Sources */,

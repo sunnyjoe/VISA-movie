@@ -33,7 +33,7 @@ class GenreListView: UIView {
         tableView.layer.borderColor = UIColor(fromHexString: "cecece").CGColor
         tableView.layer.borderWidth = 0.5
         tableView.separatorStyle = .None
-        tableView.frame = CGRectMake(10, 63.5, 150, 459)
+        tableView.frame = CGRectMake(10, 57, 150, 459)
         tableView.delegate = self
         tableView.dataSource = self
         contentView.addSubview(tableView)

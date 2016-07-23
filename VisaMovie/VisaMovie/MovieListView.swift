@@ -42,6 +42,7 @@ class MovieListView: UIView {
     }
     
     func reloadData(){
+        tableView.setContentOffset(CGPointZero, animated: true)
         tableView.reloadData()
     }
 }

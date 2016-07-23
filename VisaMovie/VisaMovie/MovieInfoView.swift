@@ -66,12 +66,8 @@ class MovieInfoView: UIView {
             overviewDescLabel.left == overviewDescLabel.superview!.left + 23
         }
         
-        constrain(overviewDescLabel, companyLabel, overviewLabel) {overviewDescLabel, companyLabel, overviewLabel in
-            companyLabel.top == overviewDescLabel.bottom + 3
-            companyLabel.left == companyLabel.superview!.left + 23
-            companyLabel.right == companyLabel.superview!.right - 23
-            
-            overviewLabel.top == companyLabel.bottom + 5
+        constrain(overviewDescLabel, overviewLabel) {overviewDescLabel, overviewLabel in
+            overviewLabel.top == overviewDescLabel.bottom + 5
             overviewLabel.left == overviewLabel.superview!.left + 23
             overviewLabel.right == overviewLabel.superview!.right - 23
         }
