@@ -15,6 +15,29 @@ class MovieVideoInfo : NSObject {
     var webSite = ""
     var size = 1
     var type = "Trailer"
+    
+    static func parseDictionaryToInfo(dic : NSDictionary) -> MovieVideoInfo {
+        let oneMovie = MovieVideoInfo()
+        if let tmp = dic["id"] as? Int{
+            oneMovie.id = tmp
+        }
+        if let tmp = dic["key"] as? String{
+            oneMovie.key = tmp
+        }
+        if let tmp = dic["name"] as? String{
+            oneMovie.name = tmp
+        }
+        if let tmp = dic["site"] as? String{
+            oneMovie.webSite = tmp
+        }
+        if let tmp = dic["size"] as? Int{
+            oneMovie.size = tmp
+        }
+        if let tmp = dic["type"] as? String{
+            oneMovie.type = tmp
+        }
+        return oneMovie
+    }
 }
 
 class MovieVideosNetTask: BaseNetTask {
@@ -31,27 +54,8 @@ class MovieVideosNetTask: BaseNetTask {
         if let array = json["results"] as? NSArray {
             for one in array {
                 if let dic = one as? NSDictionary {
-                    let oneMovie = MovieVideoInfo()
+                    let oneMovie = MovieVideoInfo.parseDictionaryToInfo(dic)
                     infoList.append(oneMovie)
-   
-                    if let tmp = dic["id"] as? Int{
-                        oneMovie.id = tmp
-                    }
-                    if let tmp = dic["key"] as? String{
-                        oneMovie.key = tmp
-                    }
-                    if let tmp = dic["name"] as? String{
-                        oneMovie.name = tmp
-                    }
-                    if let tmp = dic["site"] as? String{
-                        oneMovie.webSite = tmp
-                    }
-                    if let tmp = dic["size"] as? Int{
-                        oneMovie.size = tmp
-                    }
-                    if let tmp = dic["type"] as? String{
-                        oneMovie.type = tmp
-                    }
                 }
             }
         }

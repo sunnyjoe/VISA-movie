@@ -81,11 +81,11 @@ class MainViewController: UIViewController {
         navigationController?.navigationBarHidden = true
     }
     
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
-        navigationController?.navigationBarHidden = false
-    }
-    
+//    override func viewWillDisappear(animated: Bool) {
+//        super.viewWillDisappear(animated)
+//        navigationController?.navigationBarHidden = false
+//    }
+//    
 }
 
 

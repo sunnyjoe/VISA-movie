@@ -12,6 +12,7 @@ class MovieInfoViewController: UIViewController {
     var movieInfo : MovieInfo!
     let ytPlayer = YTPlayerView()
     
+    let bannerView = UIView()
     init(movieInfo : MovieInfo) {
         super.init(nibName: nil, bundle: nil)
         self.movieInfo = movieInfo
@@ -24,28 +25,14 @@ class MovieInfoViewController: UIViewController {
         view.backgroundColor = UIColor.whiteColor()
         title = movieInfo.title
         
-        let topView = UIView()
-        view.addSubview(topView)
-        constrain(topView) { topView in
-            topView.left == topView.superview!.left
-            topView.top == topView.superview!.top
-            topView.right == topView.superview!.right
-            topView.height == 270
-        }
-        buildTopView(topView)
+      //  updateMovieInfoView()
         
-        ytPlayer.frame = CGRectMake(0, 300, view.frame.size.width, 300)
-        view.addSubview(ytPlayer)
-        
-        
-        let one = MovieVideosNetTask()
+        let one = MovieDetailNetTask()
         one.movieId = movieInfo.id
         one.success = {(task : NSURLSessionDataTask, responseObject : AnyObject?) -> Void in
             if let data = responseObject as? NSDictionary {
-                let video = MovieVideosNetTask.parseResultToMovieVideoList(data)
-                if video.count > 0{
-                    self.ytPlayer.loadWithVideoId(video[0].key)
-                }
+                self.movieInfo = MovieDetailNetTask.parseResultToMovieInfo(data)
+               // self.updateMovieInfoView()
             }
         }
         one.failed = {(task : NSURLSessionDataTask?, error : NSError) -> Void in
@@ -53,11 +40,26 @@ class MovieInfoViewController: UIViewController {
             print(error.description)
         }
         NetWorkHandler.sharedInstance.sendNetTask(one)
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.navigationBarHidden = false
+        
+        //        ytPlayer.frame = CGRectMake(0, 300, view.frame.size.width, 300)
+        //        view.addSubview(ytPlayer)
+        //
+        //
+        //        let one = MovieVideosNetTask()
+        //        one.movieId = movieInfo.id
+        //        one.success = {(task : NSURLSessionDataTask, responseObject : AnyObject?) -> Void in
+        //            if let data = responseObject as? NSDictionary {
+        //                let video = MovieVideosNetTask.parseResultToMovieVideoList(data)
+        //                if video.count > 0{
+        //                    self.ytPlayer.loadWithVideoId(video[0].key)
+        //                }
+        //            }
+        //        }
+        //        one.failed = {(task : NSURLSessionDataTask?, error : NSError) -> Void in
+        //            print("MovieTrailerNetTask failed")
+        //            print(error.description)
+        //        }
+        //        NetWorkHandler.sharedInstance.sendNetTask(one)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -66,7 +68,7 @@ class MovieInfoViewController: UIViewController {
 }
 
 extension MovieInfoViewController {
-    func buildTopView(containView : UIView){
+    func updateMovieInfoView(containView : UIView){
         let imgIV = UIImageView()
         let titleLabel = UILabel()
         let overviewLabel = UILabel()
