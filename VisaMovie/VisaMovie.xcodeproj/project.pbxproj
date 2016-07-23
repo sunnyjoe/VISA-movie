@@ -23,6 +23,8 @@
 		0F775D9F1D432CF7009B40CF /* MovieInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F775D9E1D432CF7009B40CF /* MovieInfoViewController.swift */; };
 		0F775DA11D4337C9009B40CF /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F775DA01D4337C9009B40CF /* ViewExtensions.swift */; };
 		0F775DA41D433859009B40CF /* DJFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F775DA31D433859009B40CF /* DJFont.m */; };
+		0F775DA91D4339F8009B40CF /* UIColor+MOAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F775DA81D4339F8009B40CF /* UIColor+MOAdditions.m */; };
+		0F775DAB1D434152009B40CF /* MovieTrailerNetTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F775DAA1D434152009B40CF /* MovieTrailerNetTask.swift */; };
 		EC03B22FD14D640DEDADC042 /* Pods_VisaMovie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9C089951048AA46C4D9B20E /* Pods_VisaMovie.framework */; };
 /* End PBXBuildFile section */
 
@@ -48,6 +50,9 @@
 		0F775DA01D4337C9009B40CF /* ViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
 		0F775DA21D433859009B40CF /* DJFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJFont.h; sourceTree = "<group>"; };
 		0F775DA31D433859009B40CF /* DJFont.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJFont.m; sourceTree = "<group>"; };
+		0F775DA71D4339F8009B40CF /* UIColor+MOAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+MOAdditions.h"; sourceTree = "<group>"; };
+		0F775DA81D4339F8009B40CF /* UIColor+MOAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+MOAdditions.m"; sourceTree = "<group>"; };
+		0F775DAA1D434152009B40CF /* MovieTrailerNetTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieTrailerNetTask.swift; sourceTree = "<group>"; };
 		564B78DC1059D3AE2BAABDD5 /* Pods-VisaMovie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VisaMovie.release.xcconfig"; path = "Pods/Target Support Files/Pods-VisaMovie/Pods-VisaMovie.release.xcconfig"; sourceTree = "<group>"; };
 		B9C089951048AA46C4D9B20E /* Pods_VisaMovie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VisaMovie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD547655DE96E3CAB34B4521 /* Pods-VisaMovie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VisaMovie.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VisaMovie/Pods-VisaMovie.debug.xcconfig"; sourceTree = "<group>"; };
@@ -122,6 +127,7 @@
 				0F775D8E1D4300C0009B40CF /* BaseNetTask.swift */,
 				0F775D901D4301C7009B40CF /* GenreListNetTask.swift */,
 				0F775D921D430CB7009B40CF /* SearchMovieNetTask.swift */,
+				0F775DAA1D434152009B40CF /* MovieTrailerNetTask.swift */,
 			);
 			name = NetTask;
 			sourceTree = "<group>";
@@ -167,6 +173,8 @@
 		0F775DA61D43386A009B40CF /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				0F775DA71D4339F8009B40CF /* UIColor+MOAdditions.h */,
+				0F775DA81D4339F8009B40CF /* UIColor+MOAdditions.m */,
 				0F775DA21D433859009B40CF /* DJFont.h */,
 				0F775DA31D433859009B40CF /* DJFont.m */,
 				0F775DA01D4337C9009B40CF /* ViewExtensions.swift */,
@@ -317,6 +325,7 @@
 				0F775D931D430CB7009B40CF /* SearchMovieNetTask.swift in Sources */,
 				0F775D9D1D4328A3009B40CF /* MoviewTableViewCell.swift in Sources */,
 				0F775D9B1D43283E009B40CF /* MovieListView.swift in Sources */,
+				0F775DA91D4339F8009B40CF /* UIColor+MOAdditions.m in Sources */,
 				0F775DA41D433859009B40CF /* DJFont.m in Sources */,
 				0F775D871D42FCC3009B40CF /* MainViewController.swift in Sources */,
 				0F775D891D42FF71009B40CF /* NetWorkHandler.swift in Sources */,
@@ -324,6 +333,7 @@
 				0F775D991D431C38009B40CF /* GenreListView.swift in Sources */,
 				0F775D031D42FBBD009B40CF /* AppDelegate.m in Sources */,
 				0F775DA11D4337C9009B40CF /* ViewExtensions.swift in Sources */,
+				0F775DAB1D434152009B40CF /* MovieTrailerNetTask.swift in Sources */,
 				0F775D001D42FBBD009B40CF /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

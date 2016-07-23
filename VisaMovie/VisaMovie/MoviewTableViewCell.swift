@@ -36,9 +36,11 @@ class MoviewTableViewCell: UITableViewCell {
         constrain(titleLabel,imgIV, overviewLabel) { titleLabel, imgIV, overviewLabel in
             titleLabel.left == imgIV.right + 10
             titleLabel.right == titleLabel.superview!.right - 23
+            titleLabel.top == titleLabel.superview!.top + 10
             
             overviewLabel.left == titleLabel.left
-            overviewLabel.top == titleLabel.bottom + 3
+            overviewLabel.right == overviewLabel.superview!.right - 23
+            overviewLabel.top == overviewLabel.superview!.top + 30
             overviewLabel.bottom == overviewLabel.superview!.bottom - 10
         }
     }

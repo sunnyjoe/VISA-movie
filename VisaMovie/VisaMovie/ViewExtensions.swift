@@ -3,7 +3,6 @@
 //  DejaFashion
 //
 
-//import We
 import UIKit
 
 let borderConstraintGroup = ConstraintGroup()
@@ -12,7 +11,7 @@ extension UIImageView {
     func sd_setImageWithURLStr(str : String?){
         if let imageUrl = str{
             if let url = NSURL(string:  imageUrl){
-              //  self.sd_setImageWithURL(url)
+                self.sd_setImageWithURL(url)
             }
         }
     }

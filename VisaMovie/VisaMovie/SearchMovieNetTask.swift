@@ -23,7 +23,7 @@ class MovieInfo : NSObject {
 class SearchMovieNetTask: BaseNetTask {
     var yearRelased : Int?
     var genre : Int?
-    var sortBy = "vote_average.asc"
+    var sortBy = "vote_average.desc"
     
     override func uri() -> String!
     {
@@ -75,7 +75,9 @@ class SearchMovieNetTask: BaseNetTask {
                     if let tmp = dic["vote_average"] as? Int{
                         oneMovie.rating = tmp
                     }
-                    
+                    if let tmp = dic["poster_path"] as? String{
+                        oneMovie.imageUrl = OMDBImageBaseURL + tmp
+                    }
                 }
             }
         }

@@ -9,4 +9,5 @@ target 'VisaMovie' do
   pod 'SwiftyJSON'
   pod 'AFNetworking'
   pod 'Cartography'
+  pod 'SDWebImage', '~>3.7'
 end

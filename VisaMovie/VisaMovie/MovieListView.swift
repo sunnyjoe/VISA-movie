@@ -10,7 +10,7 @@ import UIKit
 
 
 protocol MovieListViewDelegate : NSObjectProtocol{
-    func movieListViewDidSelectMovie(movieInfo : MovieInfo?, listView : MovieListView)
+    func movieListViewDidSelectMovie(movieInfo : MovieInfo, listView : MovieListView)
 }
 
 let MovieListViewReuseCellName = "MovieListViewReuseCellName"
@@ -32,6 +32,11 @@ class MovieListView: UIView {
         tableView.registerClass(MoviewTableViewCell.self, forCellReuseIdentifier: MovieListViewReuseCellName)
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        tableView.frame = bounds
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -47,7 +52,7 @@ extension MovieListView : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        return movieInfoList.count
+        return min(movieInfoList.count, 10)
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -56,12 +61,12 @@ extension MovieListView : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = MoviewTableViewCell()
-        if let tmp = tableView.dequeueReusableCellWithIdentifier(ListViewReuseCellName) as? MoviewTableViewCell{
+        if let tmp = tableView.dequeueReusableCellWithIdentifier(MovieListViewReuseCellName) as? MoviewTableViewCell{
             cell = tmp
         }
-        
+        cell.selectionStyle = .None
         let oneMovie = movieInfoList[indexPath.row]
-        
+        cell.setInfo(oneMovie.imageUrl, title: oneMovie.title, overview: oneMovie.overview)
         return cell
     }
     

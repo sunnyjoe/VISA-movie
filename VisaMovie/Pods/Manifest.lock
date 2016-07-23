@@ -15,18 +15,23 @@ PODS:
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
   - Cartography (0.6.0)
+  - SDWebImage (3.7.6):
+    - SDWebImage/Core (= 3.7.6)
+  - SDWebImage/Core (3.7.6)
   - SwiftyJSON (2.3.2)
 
 DEPENDENCIES:
   - AFNetworking
   - Cartography
+  - SDWebImage (~> 3.7)
   - SwiftyJSON
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   Cartography: 70af183a248547694a8cfaa6b989cb7e04589985
+  SDWebImage: c325cf02c30337336b95beff20a13df489ec0ec9
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-PODFILE CHECKSUM: f585245cb70fd1fcfd8bd7c563f42a10d9bead22
+PODFILE CHECKSUM: 344fe2515055131b83c823fbde41272569a18432
 
 COCOAPODS: 1.0.1

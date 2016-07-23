@@ -41,6 +41,8 @@ class MainViewController: UIViewController {
         
         movieListView.delegate = self
         view.addSubview(movieListView)
+        
+        searchBtnDidTapped()
     }
     
     override func viewWillLayoutSubviews() {
@@ -99,6 +101,7 @@ extension MainViewController: GenreListViewDelegate, UITextFieldDelegate, MovieL
         
         yearTF.frame = CGRectMake(180, 25, 100, 30)
         yearTF.placeholder = "Year(2016)"
+        yearTF.text = "2016"
         yearTF.layer.borderColor = UIColor.blackColor().CGColor
         yearTF.layer.borderWidth = 0.5
         yearTF.returnKeyType = .Done
@@ -139,8 +142,9 @@ extension MainViewController: GenreListViewDelegate, UITextFieldDelegate, MovieL
         genreBtnDidTapped()
     }
     
-    func movieListViewDidSelectMovie(movieInfo: MovieInfo?, listView: MovieListView) {
-         
+    func movieListViewDidSelectMovie(movieInfo: MovieInfo, listView: MovieListView) {
+        let infoVC = MovieInfoViewController(movieInfo : movieInfo)
+        self.navigationController?.pushViewController(infoVC, animated: true)
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
