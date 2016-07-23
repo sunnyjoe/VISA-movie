@@ -9,21 +9,19 @@
 import UIKit
 
 class MainViewController: UIViewController {
-    var movieGenreList = [MovieGenre]()
-    
-    let genreTable = ListView(frame : CGRectMake(0, 0, 150, 250))
+    let genreListView = GenreListView(frame : CGRectMake(0, 64, 150, 250))
     let genreBtn = UIButton()
     let yearTF = UITextField()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         let one = GenreListNetTask()
         one.success = {(task : NSURLSessionDataTask, responseObject : AnyObject?) -> Void in
-             print(responseObject)
+            print(responseObject)
             if let data = responseObject as? NSDictionary {
-                self.movieGenreList = GenreListNetTask.parseResultToGenreList(data)
-                self.resetGenreList()
+                let movieGenreList = GenreListNetTask.parseResultToGenreList(data)
+                self.resetGenreList(movieGenreList)
             }
         }
         one.failed = {(task : NSURLSessionDataTask?, error : NSError) -> Void in
@@ -59,7 +57,7 @@ class MainViewController: UIViewController {
         }
         
         NetWorkHandler.sharedInstance.sendNetTask(one)
-
+        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -71,7 +69,7 @@ class MainViewController: UIViewController {
         super.viewWillDisappear(animated)
         navigationController?.navigationBarHidden = false
     }
-
+    
 }
 
 
@@ -99,10 +97,15 @@ extension MainViewController{
     }
     
     func genreBtnDidTapped() {
-        
+        if genreListView.superview == nil {
+            view.addSubview(genreListView)
+        }else{
+            genreListView.removeFromSuperview()
+        }
     }
     
-    func resetGenreList(){
-        
+    func resetGenreList(movieGenreList : [MovieGenre]){
+        genreListView.movieGenreList = movieGenreList
+        genreListView.reloadData()
     }
 }

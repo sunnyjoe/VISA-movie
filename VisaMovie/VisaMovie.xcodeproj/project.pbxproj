@@ -118,8 +118,8 @@
 		0F775D8B1D42FFF3009B40CF /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				0F775D8C1D42FFFD009B40CF /* UI */,
 				0F775D8A1D42FFE7009B40CF /* NetTask */,
+				0F775D8C1D42FFFD009B40CF /* UI */,
 			);
 			name = Modules;
 			sourceTree = "<group>";
