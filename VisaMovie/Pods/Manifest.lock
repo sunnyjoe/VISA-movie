@@ -19,19 +19,22 @@ PODS:
     - SDWebImage/Core (= 3.7.6)
   - SDWebImage/Core (3.7.6)
   - SwiftyJSON (2.3.2)
+  - youtube-ios-player-helper (0.1.6)
 
 DEPENDENCIES:
   - AFNetworking
   - Cartography
   - SDWebImage (~> 3.7)
   - SwiftyJSON
+  - youtube-ios-player-helper (~> 0.1.4)
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   Cartography: 70af183a248547694a8cfaa6b989cb7e04589985
   SDWebImage: c325cf02c30337336b95beff20a13df489ec0ec9
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
+  youtube-ios-player-helper: 21ab92db027c7ff86cb17a3843a3f6eafc8158d2
 
-PODFILE CHECKSUM: 344fe2515055131b83c823fbde41272569a18432
+PODFILE CHECKSUM: 4c2f0243776214a699b9236d1e1046f69f190b71
 
 COCOAPODS: 1.0.1
