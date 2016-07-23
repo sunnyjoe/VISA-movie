@@ -10,6 +10,7 @@ import UIKit
 
 class MovieInfoViewController: UIViewController {
     var movieInfo : MovieInfo!
+    let ytPlayer = YTPlayerView()
     
     init(movieInfo : MovieInfo) {
         super.init(nibName: nil, bundle: nil)
@@ -33,11 +34,18 @@ class MovieInfoViewController: UIViewController {
         }
         buildTopView(topView)
         
+        ytPlayer.frame = CGRectMake(0, 300, view.frame.size.width, 300)
+        view.addSubview(ytPlayer)
+        
+        
         let one = MovieVideosNetTask()
         one.movieId = movieInfo.id
         one.success = {(task : NSURLSessionDataTask, responseObject : AnyObject?) -> Void in
             if let data = responseObject as? NSDictionary {
-              print(data)
+                let video = MovieVideosNetTask.parseResultToMovieVideoList(data)
+                if video.count > 0{
+                    self.ytPlayer.loadWithVideoId(video[0].key)
+                }
             }
         }
         one.failed = {(task : NSURLSessionDataTask?, error : NSError) -> Void in
@@ -97,6 +105,7 @@ extension MovieInfoViewController {
     }
     
     func buildTrailerView(){
+        
         
     }
 }
