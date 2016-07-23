@@ -17,6 +17,8 @@ class MainViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         
+     //   title = "Moview Explore"
+        
         let one = SearchMovieNetTask()
         one.yearRelased = 2000
         one.genre = 18
@@ -34,7 +36,18 @@ class MainViewController: UIViewController {
         }
         
         NetWorkHandler.sharedInstance.sendNetTask(one)
-
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBarHidden = true
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.navigationBarHidden = false
+    }
+    
+
 
 }
