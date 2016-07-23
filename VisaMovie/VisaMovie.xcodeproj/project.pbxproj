@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		0F775D001D42FBBD009B40CF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F775CFF1D42FBBD009B40CF /* main.m */; };
 		0F775D031D42FBBD009B40CF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F775D021D42FBBD009B40CF /* AppDelegate.m */; };
-		0F775D061D42FBBD009B40CF /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F775D051D42FBBD009B40CF /* ViewController.m */; };
 		0F775D091D42FBBD009B40CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F775D071D42FBBD009B40CF /* Main.storyboard */; };
 		0F775D0B1D42FBBD009B40CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F775D0A1D42FBBD009B40CF /* Assets.xcassets */; };
 		0F775D0E1D42FBBD009B40CF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F775D0C1D42FBBD009B40CF /* LaunchScreen.storyboard */; };
@@ -48,6 +47,8 @@
 		0F775D811D42FC30009B40CF /* UIImageView+HighlightedWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F775D6F1D42FC30009B40CF /* UIImageView+HighlightedWebCache.m */; };
 		0F775D821D42FC30009B40CF /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F775D711D42FC30009B40CF /* UIImageView+WebCache.m */; };
 		0F775D831D42FC30009B40CF /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F775D731D42FC30009B40CF /* UIView+WebCacheOperation.m */; };
+		0F775D871D42FCC3009B40CF /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F775D861D42FCC3009B40CF /* MainViewController.swift */; };
+		EC03B22FD14D640DEDADC042 /* Pods_VisaMovie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9C089951048AA46C4D9B20E /* Pods_VisaMovie.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,8 +56,6 @@
 		0F775CFF1D42FBBD009B40CF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0F775D011D42FBBD009B40CF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		0F775D021D42FBBD009B40CF /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		0F775D041D42FBBD009B40CF /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		0F775D051D42FBBD009B40CF /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		0F775D081D42FBBD009B40CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0F775D0A1D42FBBD009B40CF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0F775D0D1D42FBBD009B40CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -131,6 +130,11 @@
 		0F775D711D42FC30009B40CF /* UIImageView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+WebCache.m"; sourceTree = "<group>"; };
 		0F775D721D42FC30009B40CF /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
 		0F775D731D42FC30009B40CF /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
+		0F775D851D42FCC3009B40CF /* VisaMovie-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VisaMovie-Bridging-Header.h"; sourceTree = "<group>"; };
+		0F775D861D42FCC3009B40CF /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		564B78DC1059D3AE2BAABDD5 /* Pods-VisaMovie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VisaMovie.release.xcconfig"; path = "Pods/Target Support Files/Pods-VisaMovie/Pods-VisaMovie.release.xcconfig"; sourceTree = "<group>"; };
+		B9C089951048AA46C4D9B20E /* Pods_VisaMovie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VisaMovie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FD547655DE96E3CAB34B4521 /* Pods-VisaMovie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VisaMovie.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VisaMovie/Pods-VisaMovie.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +142,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC03B22FD14D640DEDADC042 /* Pods_VisaMovie.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -149,6 +154,8 @@
 			children = (
 				0F775CFD1D42FBBD009B40CF /* VisaMovie */,
 				0F775CFC1D42FBBD009B40CF /* Products */,
+				24B82F6C2F4CE33EAF6ED746 /* Pods */,
+				F1B1B88E83CFA28DED0C6CAB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -163,11 +170,10 @@
 		0F775CFD1D42FBBD009B40CF /* VisaMovie */ = {
 			isa = PBXGroup;
 			children = (
-				0F775D841D42FC41009B40CF /* Source */,
 				0F775D021D42FBBD009B40CF /* AppDelegate.m */,
 				0F775D011D42FBBD009B40CF /* AppDelegate.h */,
-				0F775D041D42FBBD009B40CF /* ViewController.h */,
-				0F775D051D42FBBD009B40CF /* ViewController.m */,
+				0F775D861D42FCC3009B40CF /* MainViewController.swift */,
+				0F775D841D42FC41009B40CF /* Source */,
 				0F775D151D42FC0A009B40CF /* Libs */,
 				0F775CFE1D42FBBD009B40CF /* Supporting Files */,
 			);
@@ -303,12 +309,30 @@
 		0F775D841D42FC41009B40CF /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				0F775D851D42FCC3009B40CF /* VisaMovie-Bridging-Header.h */,
 				0F775D0F1D42FBBD009B40CF /* Info.plist */,
 				0F775D0C1D42FBBD009B40CF /* LaunchScreen.storyboard */,
 				0F775D0A1D42FBBD009B40CF /* Assets.xcassets */,
 				0F775D071D42FBBD009B40CF /* Main.storyboard */,
 			);
 			name = Source;
+			sourceTree = "<group>";
+		};
+		24B82F6C2F4CE33EAF6ED746 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				FD547655DE96E3CAB34B4521 /* Pods-VisaMovie.debug.xcconfig */,
+				564B78DC1059D3AE2BAABDD5 /* Pods-VisaMovie.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		F1B1B88E83CFA28DED0C6CAB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B9C089951048AA46C4D9B20E /* Pods_VisaMovie.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -318,9 +342,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0F775D121D42FBBD009B40CF /* Build configuration list for PBXNativeTarget "VisaMovie" */;
 			buildPhases = (
+				4B3D2B2F6592235497B355A1 /* [CP] Check Pods Manifest.lock */,
 				0F775CF71D42FBBD009B40CF /* Sources */,
 				0F775CF81D42FBBD009B40CF /* Frameworks */,
 				0F775CF91D42FBBD009B40CF /* Resources */,
+				764FD8ED8A61925FD7390BFC /* [CP] Embed Pods Frameworks */,
+				90470C8E3EB9B3166A7AB697 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -378,6 +405,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4B3D2B2F6592235497B355A1 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		764FD8ED8A61925FD7390BFC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VisaMovie/Pods-VisaMovie-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		90470C8E3EB9B3166A7AB697 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VisaMovie/Pods-VisaMovie-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		0F775CF71D42FBBD009B40CF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -390,7 +465,6 @@
 				0F775D511D42FC1F009B40CF /* UIRefreshControl+AFNetworking.m in Sources */,
 				0F775D4D1D42FC1F009B40CF /* UIAlertView+AFNetworking.m in Sources */,
 				0F775D401D42FC1F009B40CF /* AFHTTPRequestOperation.m in Sources */,
-				0F775D061D42FBBD009B40CF /* ViewController.m in Sources */,
 				0F775D411D42FC1F009B40CF /* AFHTTPRequestOperationManager.m in Sources */,
 				0F775D781D42FC30009B40CF /* SDWebImageCompat.m in Sources */,
 				0F775D771D42FC30009B40CF /* SDImageCache.m in Sources */,
@@ -404,6 +478,7 @@
 				0F775D4F1D42FC1F009B40CF /* UIImageView+AFNetworking.m in Sources */,
 				0F775D471D42FC1F009B40CF /* AFURLResponseSerialization.m in Sources */,
 				0F775D4C1D42FC1F009B40CF /* UIActivityIndicatorView+AFNetworking.m in Sources */,
+				0F775D871D42FCC3009B40CF /* MainViewController.swift in Sources */,
 				0F775D451D42FC1F009B40CF /* AFURLConnectionOperation.m in Sources */,
 				0F775D441D42FC1F009B40CF /* AFSecurityPolicy.m in Sources */,
 				0F775D7B1D42FC30009B40CF /* SDWebImageDownloaderOperation.m in Sources */,
@@ -530,23 +605,30 @@
 		};
 		0F775D131D42FBBD009B40CF /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FD547655DE96E3CAB34B4521 /* Pods-VisaMovie.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = VisaMovie/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = VM.VisaMovie;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "VisaMovie/VisaMovie-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		0F775D141D42FBBD009B40CF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 564B78DC1059D3AE2BAABDD5 /* Pods-VisaMovie.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = VisaMovie/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = VM.VisaMovie;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "VisaMovie/VisaMovie-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -569,6 +651,7 @@
 				0F775D141D42FBBD009B40CF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
