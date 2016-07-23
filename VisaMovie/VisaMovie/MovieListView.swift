@@ -70,13 +70,11 @@ extension MovieListView : UITableViewDelegate, UITableViewDataSource {
         if let score = oneMovie.rating{
             scoreStr = "Score: \(score)"
         }
-        let completion = {(name : String?) -> Void in
-            if name != nil {
-                cell.setInfo(oneMovie.imageUrl, title: oneMovie.title, score: scoreStr, genre: ("Genres: " + name!))
-            }
+        var year : String?
+        if oneMovie.releaseDate != nil {
+            year = "Date: " + oneMovie.releaseDate!
         }
-        DataContainer.sharedInstace.getGenreNamesFromId(oneMovie.genreIds, completion: completion)
-        cell.setInfo(oneMovie.imageUrl, title: oneMovie.title, score: scoreStr, genre: oneMovie.language)
+        cell.setInfo(oneMovie.imageUrl, title: oneMovie.title, score: scoreStr, year: year)
         
         return cell
     }

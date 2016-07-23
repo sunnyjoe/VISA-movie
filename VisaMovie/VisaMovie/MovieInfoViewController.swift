@@ -35,11 +35,14 @@ class MovieInfoViewController: UIViewController {
         scrollView.contentInset = UIEdgeInsetsMake(0, 0, 23, 0)
         view.addSubview(scrollView)
         
-        scrollView.addSubview(bannerView)
-        scrollView.addSubview(textInfoView)
-        
         bannerView.frame = CGRectMake(0, 0, view.frame.size.width, view.frame.size.height * 0.617)
         textInfoView.frame = CGRectMake(0, CGRectGetMaxY(bannerView.frame) + 8, view.frame.size.width, 200)
+        let borderV = UIView(frame : CGRectMake(0, CGRectGetMaxY(bannerView.frame), view.frame.size.width, 0.5))
+        borderV.backgroundColor = UIColor(fromHexString: "cecece")
+        
+        scrollView.addSubview(bannerView)
+        scrollView.addSubview(textInfoView)
+        scrollView.addSubview(borderV)
         
         view.addSubview(ytPlayer)
         ytPlayer.frame = CGRectMake(view.frame.size.width - 200, view.frame.size.height - 140, 200, 140)
@@ -62,6 +65,8 @@ class MovieInfoViewController: UIViewController {
     }
     
     func getMovieVideoInfo(){
+        MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        
         let vNetTask = MovieVideosNetTask()
         vNetTask.movieId = movieInfo.id
         vNetTask.success = {(task : NSURLSessionDataTask, responseObject : AnyObject?) -> Void in
@@ -71,15 +76,19 @@ class MovieInfoViewController: UIViewController {
                     self.ytPlayer.loadWithVideoId(video[0].key)
                 }
             }
+            MBProgressHUD.hideHUDForView(self.view, animated: true)
         }
         vNetTask.failed = {(task : NSURLSessionDataTask?, error : NSError) -> Void in
             print("MovieTrailerNetTask failed")
             print(error.description)
+            MBProgressHUD.hideHUDForView(self.view, animated: true)
         }
         NetWorkHandler.sharedInstance.sendNetTask(vNetTask)
     }
     
     func getMovieDetailInfo(){
+        MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        
         let dNetTask = MovieDetailNetTask()
         dNetTask.movieId = movieInfo.id
         dNetTask.success = {(task : NSURLSessionDataTask, responseObject : AnyObject?) -> Void in
@@ -89,10 +98,12 @@ class MovieInfoViewController: UIViewController {
                 self.ytPlayer.hidden = false
                 self.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 23 + 140, 0)
             }
+            MBProgressHUD.hideHUDForView(self.view, animated: true)
         }
         dNetTask.failed = {(task : NSURLSessionDataTask?, error : NSError) -> Void in
             print("MovieTrailerNetTask failed")
             print(error.description)
+            MBProgressHUD.hideHUDForView(self.view, animated: true)
         }
         NetWorkHandler.sharedInstance.sendNetTask(dNetTask)
     }

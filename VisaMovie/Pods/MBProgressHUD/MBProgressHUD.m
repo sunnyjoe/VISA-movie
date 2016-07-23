@@ -122,6 +122,7 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 
 + (BOOL)hideHUDForView:(UIView *)view animated:(BOOL)animated {
 	MBProgressHUD *hud = [self HUDForView:view];
+     hud.status = Hidding;
 	if (hud != nil) {
 		hud.removeFromSuperViewOnHide = YES;
 		[hud hide:animated];
@@ -143,7 +144,10 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 	NSEnumerator *subviewsEnum = [view.subviews reverseObjectEnumerator];
 	for (UIView *subview in subviewsEnum) {
 		if ([subview isKindOfClass:self]) {
-			return (MBProgressHUD *)subview;
+            MBProgressHUD *mbHud = (MBProgressHUD *)subview;
+            if (mbHud.status != Hidding) {
+                return mbHud;
+            }
 		}
 	}
 	return nil;

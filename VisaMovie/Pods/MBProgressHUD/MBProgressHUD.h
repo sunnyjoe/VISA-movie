@@ -57,6 +57,11 @@ typedef NS_ENUM(NSInteger, MBProgressHUDAnimation) {
 	MBProgressHUDAnimationZoomIn
 };
 
+typedef enum MBProgressHUDStatus
+{
+    Normal = 0,
+    Hidding = 1,
+} ProgressStatus;
 
 #ifndef MB_INSTANCETYPE
 #if __has_feature(objc_instancetype)
@@ -288,7 +293,7 @@ typedef void (^MBProgressHUDCompletionBlock)();
  * @see MBProgressHUDMode
  */
 @property (assign) MBProgressHUDMode mode;
-
+@property (atomic, assign) ProgressStatus status;
 /**
  * The animation type that should be used when the HUD is shown and hidden. 
  *
