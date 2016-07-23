@@ -9,7 +9,7 @@
 import UIKit
 
 class MovieGenre : NSObject {
-    var id = ""
+    var id = 0
     var name = ""
 }
 
@@ -26,8 +26,9 @@ class GenreListNetTask: BaseNetTask {
             for one in array {
                 if let dic = one as? NSDictionary {
                     let oneGenre = MovieGenre()
-                    if let tmp = dic["id"] as? String{
+                    if let tmp = dic["id"] as? Int{
                         oneGenre.id = tmp
+                        print(tmp)
                     }
                     if let tmp = dic["name"] as? String{
                         oneGenre.name = tmp

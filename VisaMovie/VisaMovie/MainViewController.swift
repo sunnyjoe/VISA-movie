@@ -10,17 +10,22 @@ import UIKit
 
 class MainViewController: UIViewController {
     var movieGenreList = [MovieGenre]()
+    let genreTable = UIScrollView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         
-        let one = GenreListNetTask()
+        let one = SearchMovieNetTask()
+        one.genre = 18
+        one.year = 2000
+        
         one.success = {(task : NSURLSessionDataTask, responseObject : AnyObject?) -> Void in
-            if let data = responseObject as? NSDictionary {
-                self.movieGenreList = GenreListNetTask.parseResultToGenreList(data)
-            }
+             print(responseObject)
+//            if let data = responseObject as? NSDictionary {
+//                self.movieGenreList = GenreListNetTask.parseResultToGenreList(data)
+//            }
             
         }
         one.failed = {(task : NSURLSessionDataTask?, error : NSError) -> Void in
