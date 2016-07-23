@@ -8,6 +8,18 @@
 
 import UIKit
 
+class MovieInfo : NSObject {
+    var id = 0
+    var adult : Bool?
+    var title = ""
+    var genreIds : [Int]?
+    var rating : Int?
+    var releaseDate : String?
+    var imageUrl : String?
+    var overview : String?
+    var originalLanguage : String?
+}
+
 class SearchMovieNetTask: BaseNetTask {
     var yearRelased : Int?
     var genre : Int?
@@ -29,4 +41,45 @@ class SearchMovieNetTask: BaseNetTask {
         dic["sort_by"] = sortBy
         return dic
     }
+    
+    static func parseResultToMovieInfoList(json : NSDictionary) -> [MovieInfo] {
+        var infoList = [MovieInfo]()
+        
+        if let array = json["results"] as? NSArray {
+            for one in array {
+                if let dic = one as? NSDictionary {
+                    let oneMovie = MovieInfo()
+                    infoList.append(oneMovie)
+                    
+                    if let tmp = dic["adult"] as? Bool{
+                        oneMovie.adult = tmp
+                    }
+                    if let tmp = dic["genre_ids"] as? [Int]{
+                        oneMovie.genreIds = tmp
+                    }
+                    if let tmp = dic["id"] as? Int{
+                        oneMovie.id = tmp
+                    }
+                    if let tmp = dic["original_language"] as? String{
+                        oneMovie.originalLanguage = tmp
+                    }
+                    if let tmp = dic["title"] as? String{
+                        oneMovie.title = tmp
+                    }
+                    if let tmp = dic["overview"] as? String{
+                        oneMovie.overview = tmp
+                    }
+                    if let tmp = dic["release_date"] as? String{
+                        oneMovie.releaseDate = tmp
+                    }
+                    if let tmp = dic["vote_average"] as? Int{
+                        oneMovie.rating = tmp
+                    }
+                    
+                }
+            }
+        }
+        return infoList
+    }
+
 }

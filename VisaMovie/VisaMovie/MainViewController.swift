@@ -13,6 +13,8 @@ class MainViewController: UIViewController {
     let genreBtn = UIButton()
     let yearTF = UITextField()
     
+    var selectedGenre : MovieGenre?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -38,11 +40,15 @@ class MainViewController: UIViewController {
     }
     
     func searchBtnDidTapped(){
+        yearTF.resignFirstResponder()
+        
         let one = SearchMovieNetTask()
         if let tmp = yearTF.text{
             one.yearRelased = Int(tmp)
         }
-        one.genre = 18
+        if let tmp = selectedGenre{
+            one.genre = tmp.id
+        }
         
         one.success = {(task : NSURLSessionDataTask, responseObject : AnyObject?) -> Void in
             print(responseObject)
@@ -73,7 +79,7 @@ class MainViewController: UIViewController {
 }
 
 
-extension MainViewController{
+extension MainViewController: GenreListViewDelegate, UITextFieldDelegate{
     func buildTopView(containView : UIView){
         genreBtn.frame = CGRectMake(10, 20, 150, 44)
         genreBtn.setTitleColor(UIColor.blackColor(), forState: .Normal)
@@ -87,6 +93,9 @@ extension MainViewController{
         yearTF.placeholder = "Year(2016)"
         yearTF.layer.borderColor = UIColor.blackColor().CGColor
         yearTF.layer.borderWidth = 0.5
+        yearTF.returnKeyType = .Done
+        yearTF.keyboardType = .NumberPad
+        yearTF.delegate = self
         containView.addSubview(yearTF)
         
         let searchBtn = UIButton(frame : CGRectMake(290, 20, 60, 44))
@@ -105,7 +114,25 @@ extension MainViewController{
     }
     
     func resetGenreList(movieGenreList : [MovieGenre]){
+        genreListView.delegate = self
+        genreListView.layer.borderColor = UIColor.blackColor().CGColor
+        genreListView.layer.borderWidth = 0.5
         genreListView.movieGenreList = movieGenreList
         genreListView.reloadData()
+    }
+    
+    func genreListViewDidSelectGenre(genre: MovieGenre?, listView: GenreListView) {
+        selectedGenre = genre
+        if genre != nil {
+            genreBtn.setTitle(genre!.name, forState: .Normal)
+        }else{
+            genreBtn.setTitle("All", forState: .Normal)
+        }
+        genreBtnDidTapped()
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }

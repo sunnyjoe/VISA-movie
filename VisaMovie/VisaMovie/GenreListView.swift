@@ -9,7 +9,7 @@
 import UIKit
 
 protocol GenreListViewDelegate : NSObjectProtocol{
-    func genreListViewDidSelectGenre(genre : MovieGenre, listView : GenreListView)
+    func genreListViewDidSelectGenre(genre : MovieGenre?, listView : GenreListView)
 }
 
 let ListViewReuseCellName = "ListViewReuseCellName"
@@ -22,7 +22,8 @@ class GenreListView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        tableView.bounds = bounds
+        tableView.separatorStyle = .None
+        tableView.frame = bounds
         tableView.delegate = self
         tableView.dataSource = self
         addSubview(tableView)

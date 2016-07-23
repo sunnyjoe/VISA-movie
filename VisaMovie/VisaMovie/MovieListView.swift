@@ -1,0 +1,73 @@
+//
+//  MovieListView.swift
+//  VisaMovie
+//
+//  Created by Jiao on 23/7/16.
+//  Copyright © 2016 Jiao. All rights reserved.
+//
+
+import UIKit
+
+
+protocol MovieListViewDelegate : NSObjectProtocol{
+    func movieListViewDidSelectGenre(movieInfo : MovieInfo?, listView : MovieListView)
+}
+
+let MovieListViewReuseCellName = "MovieListViewReuseCellName"
+
+class MovieListView: UIView {
+    private let tableView = UITableView()
+    var movieInfoList = [MovieInfo]()
+    weak var delegate : MovieListViewDelegate?
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        tableView.separatorStyle = .None
+        tableView.frame = bounds
+        tableView.delegate = self
+        tableView.dataSource = self
+        addSubview(tableView)
+        
+        tableView.registerClass(MoviewTableViewCell.self, forCellReuseIdentifier: MovieListViewReuseCellName)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func reloadData(){
+        tableView.reloadData()
+    }
+}
+
+extension MovieListView : UITableViewDelegate, UITableViewDataSource {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
+        return movieInfoList.count
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 61
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        var cell = MoviewTableViewCell()
+        if let tmp = tableView.dequeueReusableCellWithIdentifier(ListViewReuseCellName) as? MoviewTableViewCell{
+            cell = tmp
+        }
+        
+        let oneContact = movieInfoList[indexPath.row]
+        
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let oneContact = movieInfoList[indexPath.row]
+        delegate?.movieListViewDidSelectGenre(oneContact, listView: self)
+    }
+    
+}
