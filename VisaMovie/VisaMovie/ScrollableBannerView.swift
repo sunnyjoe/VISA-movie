@@ -82,7 +82,7 @@ class ScrollableBannerView: UIView, UIScrollViewDelegate {
             btn.clipsToBounds = true
            // btn.property = imageV
             imageV.sd_setImageWithURLStr(one)
-            imageV.contentMode = .ScaleAspectFill
+            imageV.contentMode = .ScaleAspectFit
             if !fill {
                 imageV.contentMode = .ScaleAspectFit
             }

@@ -40,6 +40,28 @@ class DataContainer: NSObject {
         
         NetWorkHandler.sharedInstance.sendNetTask(one)
     }
+    
+    func getGenreNamesFromId(ids : [Int]?, completion : ((String?) -> Void)) {
+        if ids == nil {
+            completion(nil)
+            return
+        }
+        
+        let completion = {(list : [MovieGenre]) -> Void in
+            var combine : String?
+            for one in list {
+                if ids!.contains(one.id) {
+                    if combine == nil{
+                        combine = ""
+                    }
+                    combine = combine! + " " + one.name
+                }
+            }
+            completion(combine)
+        }
+        
+        DataContainer.sharedInstace.getGenreList(completion)
+    }
 }
 
 extension DataContainer {

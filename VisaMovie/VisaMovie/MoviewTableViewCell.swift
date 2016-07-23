@@ -11,44 +11,55 @@ import UIKit
 class MoviewTableViewCell: UITableViewCell {
     var imgIV = UIImageView()
     var titleLabel = UILabel()
-    var overviewLabel = UILabel()
+    let scoreLabel = UILabel()
+    let languageLabel = UILabel()
+    let genreLabel = UILabel()
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        addSubviews(imgIV, titleLabel,overviewLabel)
+        clipsToBounds = true
+        addSubviews(imgIV, titleLabel,languageLabel,scoreLabel)
         
         imgIV.contentMode = .ScaleAspectFit
         constrain(imgIV) { imgIV in
-            imgIV.left == imgIV.superview!.left + 23
+            imgIV.left == imgIV.superview!.left + 18
             imgIV.top == imgIV.superview!.top + 10
             imgIV.bottom == imgIV.superview!.bottom - 10
             imgIV.width == 150
         }
-        titleLabel.numberOfLines = 1
+        titleLabel.numberOfLines = 0
         titleLabel.withFontHeleticaMedium(15).withTextColor(UIColor.defaultBlack())
         titleLabel.textAlignment = .Left
         
-        overviewLabel.numberOfLines = 0
-        overviewLabel.withFontHeletica(15).withTextColor(UIColor.defaultBlack())
-        overviewLabel.textAlignment = .Left
+        scoreLabel.withFontHeletica(15).withTextColor(UIColor.defaultBlack())
         
-        constrain(titleLabel,imgIV, overviewLabel) { titleLabel, imgIV, overviewLabel in
-            titleLabel.left == imgIV.right + 10
+        languageLabel.numberOfLines = 0
+        languageLabel.withFontHeletica(15).withTextColor(UIColor.defaultBlack())
+        languageLabel.textAlignment = .Left
+        
+        constrain(titleLabel,imgIV, scoreLabel, languageLabel) { titleLabel, imgIV, scoreLabel, languageLabel in
+            titleLabel.left == imgIV.right + 8
             titleLabel.right == titleLabel.superview!.right - 23
             titleLabel.top == titleLabel.superview!.top + 10
             
-            overviewLabel.left == titleLabel.left
-            overviewLabel.right == overviewLabel.superview!.right - 23
-            overviewLabel.top == overviewLabel.superview!.top + 30
-            overviewLabel.bottom == overviewLabel.superview!.bottom - 10
+            scoreLabel.left == titleLabel.left
+            scoreLabel.top == titleLabel.bottom + 5
+//
+            languageLabel.left == titleLabel.left
+            languageLabel.right == languageLabel.superview!.right - 23
+            languageLabel.top == scoreLabel.bottom + 5
+         //   overviewLabel.bottom == overviewLabel.superview!.bottom - 10
         }
     }
     
-    func setInfo(urlStr : String?, title : String?, overview : String?){
+    func setInfo(urlStr : String?, title : String?, score : String?, genre : String?){
+        imgIV.image = UIImage(named: "PosterPlaceHolder")
+        
         imgIV.sd_setImageWithURLStr(urlStr)
+        scoreLabel.text = score
         titleLabel.text = title
-        overviewLabel.text = overview
+        languageLabel.text = genre
     }
     
     required init?(coder aDecoder: NSCoder) {

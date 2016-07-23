@@ -66,7 +66,18 @@ extension MovieListView : UITableViewDelegate, UITableViewDataSource {
         }
         cell.selectionStyle = .None
         let oneMovie = movieInfoList[indexPath.row]
-        cell.setInfo(oneMovie.imageUrl, title: oneMovie.title, overview: oneMovie.overview)
+        var scoreStr : String?
+        if let score = oneMovie.rating{
+            scoreStr = "Score: \(score)"
+        }
+        let completion = {(name : String?) -> Void in
+            if name != nil {
+                cell.setInfo(oneMovie.imageUrl, title: oneMovie.title, score: scoreStr, genre: ("Genres: " + name!))
+            }
+        }
+        DataContainer.sharedInstace.getGenreNamesFromId(oneMovie.genreIds, completion: completion)
+        cell.setInfo(oneMovie.imageUrl, title: oneMovie.title, score: scoreStr, genre: oneMovie.language)
+        
         return cell
     }
     

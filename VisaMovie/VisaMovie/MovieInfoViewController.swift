@@ -12,6 +12,7 @@ class MovieInfoViewController: UIViewController {
     var movieInfo : MovieInfo!
     let ytPlayer = YTPlayerView()
     
+    let scrollView = UIScrollView()
     let bannerView = ScrollableBannerView()
     let textInfoView = MovieInfoView()
     
@@ -30,23 +31,34 @@ class MovieInfoViewController: UIViewController {
         backButton.setImage(UIImage(named: "BackIconNormal"), forState: .Normal)
         backButton.addTarget(self, action: #selector(backButtonDidClicked), forControlEvents: .TouchUpInside)
         
-        let scrollView = UIScrollView(frame : view.bounds)
+        scrollView.frame = view.bounds
+        scrollView.contentInset = UIEdgeInsetsMake(0, 0, 23, 0)
         view.addSubview(scrollView)
         
         scrollView.addSubview(bannerView)
-        bannerView.frame = CGRectMake(0, 0, view.frame.size.width, view.frame.size.height * 0.617)
-        
-        textInfoView.frame = CGRectMake(0, CGRectGetMaxY(bannerView.frame) + 8, view.frame.size.width, 200)
         scrollView.addSubview(textInfoView)
         
-        ytPlayer.frame = CGRectMake(0, 300, view.frame.size.width, 300)
-        // view.addSubview(ytPlayer)
+        bannerView.frame = CGRectMake(0, 0, view.frame.size.width, view.frame.size.height * 0.617)
+        textInfoView.frame = CGRectMake(0, CGRectGetMaxY(bannerView.frame) + 8, view.frame.size.width, 200)
+        
+        view.addSubview(ytPlayer)
+        ytPlayer.frame = CGRectMake(view.frame.size.width - 200, view.frame.size.height - 140, 200, 140)
+        ytPlayer.hidden = true
         resetUI()
         
         getMovieDetailInfo()
         getMovieVideoInfo()
         
         view.addSubview(backButton)
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        
     }
     
     func getMovieVideoInfo(){
@@ -74,6 +86,8 @@ class MovieInfoViewController: UIViewController {
             if let data = responseObject as? NSDictionary {
                 self.movieInfo = MovieDetailNetTask.parseResultToMovieInfo(data)
                 self.resetUI()
+                self.ytPlayer.hidden = false
+                self.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 23 + 140, 0)
             }
         }
         dNetTask.failed = {(task : NSURLSessionDataTask?, error : NSError) -> Void in
@@ -101,18 +115,14 @@ class MovieInfoViewController: UIViewController {
         if let lan = movieInfo.language{
             textInfoView.languageLabel.text = "Language: " + lan
         }
-        if movieInfo.genreIds != nil {
-            let completion = {(list : [MovieGenre]) -> Void in
-                var combine = ""
-                for one in list {
-                    if self.movieInfo.genreIds!.contains(one.id) {
-                        combine += " " + one.name
-                    }
-                }
-                self.textInfoView.genreLabel.text = "Genres: " + combine
+        
+        let completion = {(name : String?) -> Void in
+            if name != nil {
+                self.textInfoView.genreLabel.text = "Genres: " + name!
             }
-            DataContainer.sharedInstace.getGenreList(completion)
         }
+        DataContainer.sharedInstace.getGenreNamesFromId(self.movieInfo.genreIds, completion: completion)
+        
         if let ct = movieInfo.country{
             textInfoView.contryLabel.text = "Country: " + ct
         }
@@ -120,6 +130,10 @@ class MovieInfoViewController: UIViewController {
             textInfoView.companyLabel.text = "Company: " + cN
         }
         textInfoView.overviewLabel.text = movieInfo.overview
+        
+        let height = textInfoView.getViewHeight()
+        textInfoView.frame = CGRectMake(0, textInfoView.frame.origin.y, scrollView.frame.size.width, height)
+        scrollView.contentSize = CGSizeMake(scrollView.frame.size.width, CGRectGetMaxY(textInfoView.frame))
     }
     
     func backButtonDidClicked(){
