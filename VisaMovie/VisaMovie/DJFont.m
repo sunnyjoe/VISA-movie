@@ -1,9 +1,5 @@
 //
 //  DJFont.m
-//  DejaFashion
-//
-//  Created by Kevin Lin on 18/11/14.
-//  Copyright (c) 2014 Mozat. All rights reserved.
 //
 
 #import "DJFont.h"

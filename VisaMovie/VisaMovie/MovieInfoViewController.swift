@@ -12,7 +12,9 @@ class MovieInfoViewController: UIViewController {
     var movieInfo : MovieInfo!
     let ytPlayer = YTPlayerView()
     
-    let bannerView = UIView()
+    let bannerView = ScrollableBannerView()
+    let textInfoView = MovieInfoView()
+    
     init(movieInfo : MovieInfo) {
         super.init(nibName: nil, bundle: nil)
         self.movieInfo = movieInfo
@@ -23,91 +25,113 @@ class MovieInfoViewController: UIViewController {
         edgesForExtendedLayout = .None
         
         view.backgroundColor = UIColor.whiteColor()
-        title = movieInfo.title
         
-      //  updateMovieInfoView()
+        let backButton = UIButton(frame: CGRectMake(18, 24, 35, 35))
+        backButton.setImage(UIImage(named: "BackIconNormal"), forState: .Normal)
+        backButton.addTarget(self, action: #selector(backButtonDidClicked), forControlEvents: .TouchUpInside)
         
-        let one = MovieDetailNetTask()
-        one.movieId = movieInfo.id
-        one.success = {(task : NSURLSessionDataTask, responseObject : AnyObject?) -> Void in
+        let scrollView = UIScrollView(frame : view.bounds)
+        view.addSubview(scrollView)
+        
+        scrollView.addSubview(bannerView)
+        bannerView.frame = CGRectMake(0, 0, view.frame.size.width, view.frame.size.height * 0.617)
+        
+        textInfoView.frame = CGRectMake(0, CGRectGetMaxY(bannerView.frame) + 8, view.frame.size.width, 200)
+        scrollView.addSubview(textInfoView)
+        
+        ytPlayer.frame = CGRectMake(0, 300, view.frame.size.width, 300)
+        // view.addSubview(ytPlayer)
+        resetUI()
+        
+        getMovieDetailInfo()
+        getMovieVideoInfo()
+        
+        view.addSubview(backButton)
+    }
+    
+    func getMovieVideoInfo(){
+        let vNetTask = MovieVideosNetTask()
+        vNetTask.movieId = movieInfo.id
+        vNetTask.success = {(task : NSURLSessionDataTask, responseObject : AnyObject?) -> Void in
             if let data = responseObject as? NSDictionary {
-                self.movieInfo = MovieDetailNetTask.parseResultToMovieInfo(data)
-               // self.updateMovieInfoView()
+                let video = MovieVideosNetTask.parseResultToMovieVideoList(data)
+                if video.count > 0{
+                    self.ytPlayer.loadWithVideoId(video[0].key)
+                }
             }
         }
-        one.failed = {(task : NSURLSessionDataTask?, error : NSError) -> Void in
+        vNetTask.failed = {(task : NSURLSessionDataTask?, error : NSError) -> Void in
             print("MovieTrailerNetTask failed")
             print(error.description)
         }
-        NetWorkHandler.sharedInstance.sendNetTask(one)
-        
-        //        ytPlayer.frame = CGRectMake(0, 300, view.frame.size.width, 300)
-        //        view.addSubview(ytPlayer)
-        //
-        //
-        //        let one = MovieVideosNetTask()
-        //        one.movieId = movieInfo.id
-        //        one.success = {(task : NSURLSessionDataTask, responseObject : AnyObject?) -> Void in
-        //            if let data = responseObject as? NSDictionary {
-        //                let video = MovieVideosNetTask.parseResultToMovieVideoList(data)
-        //                if video.count > 0{
-        //                    self.ytPlayer.loadWithVideoId(video[0].key)
-        //                }
-        //            }
-        //        }
-        //        one.failed = {(task : NSURLSessionDataTask?, error : NSError) -> Void in
-        //            print("MovieTrailerNetTask failed")
-        //            print(error.description)
-        //        }
-        //        NetWorkHandler.sharedInstance.sendNetTask(one)
+        NetWorkHandler.sharedInstance.sendNetTask(vNetTask)
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    func getMovieDetailInfo(){
+        let dNetTask = MovieDetailNetTask()
+        dNetTask.movieId = movieInfo.id
+        dNetTask.success = {(task : NSURLSessionDataTask, responseObject : AnyObject?) -> Void in
+            if let data = responseObject as? NSDictionary {
+                self.movieInfo = MovieDetailNetTask.parseResultToMovieInfo(data)
+                self.resetUI()
+            }
+        }
+        dNetTask.failed = {(task : NSURLSessionDataTask?, error : NSError) -> Void in
+            print("MovieTrailerNetTask failed")
+            print(error.description)
+        }
+        NetWorkHandler.sharedInstance.sendNetTask(dNetTask)
     }
-}
-
-extension MovieInfoViewController {
-    func updateMovieInfoView(containView : UIView){
-        let imgIV = UIImageView()
-        let titleLabel = UILabel()
-        let overviewLabel = UILabel()
-        
-        containView.addSubviews(imgIV, titleLabel,overviewLabel)
-        imgIV.sd_setImageWithURLStr(movieInfo.imageUrl)
-        titleLabel.text = movieInfo.title
-        overviewLabel.text = movieInfo.overview
-        
-        imgIV.clipsToBounds = true
-        imgIV.contentMode = .ScaleAspectFill
-        constrain(imgIV) { imgIV in
-            imgIV.left == imgIV.superview!.left + 23
-            imgIV.top == imgIV.superview!.top + 10
-            imgIV.bottom == imgIV.superview!.bottom - 10
-            imgIV.width == 200
+    
+    func resetUI(){
+        var banners = [String]()
+        if let tmp = movieInfo.imageUrl{
+            banners.append(tmp)
         }
-        titleLabel.numberOfLines = 1
-        titleLabel.withFontHeleticaMedium(15).withTextColor(UIColor.defaultBlack())
-        titleLabel.textAlignment = .Left
-        
-        overviewLabel.numberOfLines = 0
-        overviewLabel.withFontHeletica(15).withTextColor(UIColor.defaultBlack())
-        overviewLabel.textAlignment = .Left
-        
-        constrain(titleLabel,imgIV, overviewLabel) { titleLabel, imgIV, overviewLabel in
-            titleLabel.left == imgIV.right + 10
-            titleLabel.right == titleLabel.superview!.right - 23
-            titleLabel.top == titleLabel.superview!.top + 10
-            
-            overviewLabel.left == titleLabel.left
-            overviewLabel.right == overviewLabel.superview!.right - 23
-            overviewLabel.top == overviewLabel.superview!.top + 30
-            overviewLabel.bottom == overviewLabel.superview!.bottom - 10
+        if let tmp = movieInfo.backdropUrl{
+            banners.append(tmp)
         }
+        bannerView.setScrollImages(banners)
+        
+        textInfoView.titleLabel.text = movieInfo.title
+        if let rate = movieInfo.rating {
+            textInfoView.scoreLabel.text = "Score: \(rate)"
+        }
+        
+        if let lan = movieInfo.language{
+            textInfoView.languageLabel.text = "Language: " + lan
+        }
+        if movieInfo.genreIds != nil {
+            let completion = {(list : [MovieGenre]) -> Void in
+                var combine = ""
+                for one in list {
+                    if self.movieInfo.genreIds!.contains(one.id) {
+                        combine += " " + one.name
+                    }
+                }
+                self.textInfoView.genreLabel.text = "Genres: " + combine
+            }
+            DataContainer.sharedInstace.getGenreList(completion)
+        }
+        if let ct = movieInfo.country{
+            textInfoView.contryLabel.text = "Country: " + ct
+        }
+        if let cN = movieInfo.companyName{
+            textInfoView.companyLabel.text = "Company: " + cN
+        }
+        textInfoView.overviewLabel.text = movieInfo.overview
+    }
+    
+    func backButtonDidClicked(){
+        navigationController?.popViewControllerAnimated(true)
     }
     
     func buildTrailerView(){
         
         
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }

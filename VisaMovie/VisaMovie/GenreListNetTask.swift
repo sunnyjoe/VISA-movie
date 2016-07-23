@@ -11,6 +11,17 @@ import UIKit
 class MovieGenre : NSObject {
     var id = 0
     var name = ""
+    
+    static func parseDicToGenre(dic : NSDictionary) -> MovieGenre{
+        let oneGenre = MovieGenre()
+        if let tmp = dic["id"] as? Int{
+            oneGenre.id = tmp
+        }
+        if let tmp = dic["name"] as? String{
+            oneGenre.name = tmp
+        }
+        return oneGenre
+    }
 }
 
 class GenreListNetTask: BaseNetTask {
@@ -25,13 +36,7 @@ class GenreListNetTask: BaseNetTask {
         if let array = json["genres"] as? NSArray {
             for one in array {
                 if let dic = one as? NSDictionary {
-                    let oneGenre = MovieGenre()
-                    if let tmp = dic["id"] as? Int{
-                        oneGenre.id = tmp
-                    }
-                    if let tmp = dic["name"] as? String{
-                        oneGenre.name = tmp
-                    }
+                    let oneGenre = MovieGenre.parseDicToGenre(dic)
                     genreList.append(oneGenre)
                 }
             }

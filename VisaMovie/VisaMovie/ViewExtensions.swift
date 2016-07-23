@@ -1,6 +1,6 @@
 //
 //  ViewExtensions.swift
-//  DejaFashion
+//
 //
 
 import UIKit
@@ -30,12 +30,17 @@ extension UIView {
         }
     }
     
+    func removeAllSubViews() {
+        let subViews = self.subviews
+        for v in subViews {
+            v.removeFromSuperview()
+        }
+    }
+    
     func withBackgroundColor(color : UIColor) -> UIView {
         backgroundColor = color
         return self
     }
-        
-    
     
     func hideViews(views : UIView...) {
         views.forEach { (view) -> () in
@@ -142,7 +147,7 @@ extension UIButton {
         setImage(image, forState: state)
         return self
     }
-
+    
 }
 
 extension UIColor {

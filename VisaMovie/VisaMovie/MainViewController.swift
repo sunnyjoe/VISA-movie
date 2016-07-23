@@ -20,19 +20,10 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let one = GenreListNetTask()
-        one.success = {(task : NSURLSessionDataTask, responseObject : AnyObject?) -> Void in
-            if let data = responseObject as? NSDictionary {
-                let movieGenreList = GenreListNetTask.parseResultToGenreList(data)
-                self.resetGenreList(movieGenreList)
-            }
+        let completion = {(list : [MovieGenre]) -> Void in
+            self.resetGenreList(list)
         }
-        one.failed = {(task : NSURLSessionDataTask?, error : NSError) -> Void in
-            print("GenreListNetTask failed")
-            print(error.description)
-        }
-        
-        NetWorkHandler.sharedInstance.sendNetTask(one)
+        DataContainer.sharedInstace.getGenreList(completion)
         
         let topView = UIView(frame : CGRectMake(0, 0, view.frame.size.width, 64))
         topView.backgroundColor = UIColor.lightGrayColor()
@@ -81,11 +72,11 @@ class MainViewController: UIViewController {
         navigationController?.navigationBarHidden = true
     }
     
-//    override func viewWillDisappear(animated: Bool) {
-//        super.viewWillDisappear(animated)
-//        navigationController?.navigationBarHidden = false
-//    }
-//    
+    //    override func viewWillDisappear(animated: Bool) {
+    //        super.viewWillDisappear(animated)
+    //        navigationController?.navigationBarHidden = false
+    //    }
+    //
 }
 
 

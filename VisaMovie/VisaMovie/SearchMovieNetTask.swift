@@ -13,12 +13,13 @@ class MovieInfo : NSObject {
     var adult : Bool?
     var title = ""
     var genreIds : [Int]?
+  //  var genres = [MovieGenre]()
     var rating : Int?
     var releaseDate : String?
     var imageUrl : String?
     var backdropUrl : String?
     var overview : String?
-    var originalLanguage : String?
+    var language : String?
     var companyName : String?
     var country : String?
     
@@ -32,9 +33,6 @@ class MovieInfo : NSObject {
         }
         if let tmp = dic["id"] as? Int{
             oneMovie.id = tmp
-        }
-        if let tmp = dic["original_language"] as? String{
-            oneMovie.originalLanguage = tmp
         }
         if let tmp = dic["title"] as? String{
             oneMovie.title = tmp
@@ -54,14 +52,39 @@ class MovieInfo : NSObject {
         if let tmp = dic["backdrop_path"] as? String{
             oneMovie.backdropUrl = OMDBImageBaseURL + tmp
         }
-        if let tmp = dic["production_companies"] as? NSDictionary{
-            if let tmpName = tmp["name"] as? String{
-                oneMovie.companyName = tmpName
+//        if let tmp = dic["genres"] as? NSArray{
+//            for oneG in tmp {
+//                if let tmpName = oneG as? NSDictionary{
+//                   oneMovie.genres.append(MovieGenre.parseDicToGenre(tmpName))
+//                }
+//            }
+//        }
+        
+        if let tmp = dic["production_companies"] as? NSArray{
+            if tmp.count > 0{
+                if let dicTmp = tmp[0] as? NSDictionary{
+                    if let tmpName = dicTmp["name"] as? String{
+                        oneMovie.companyName = tmpName
+                    }
+                }
             }
         }
-        if let tmp = dic["production_countries"] as? NSDictionary{
-            if let tmpName = tmp["name"] as? String{
-                oneMovie.country = tmpName
+        if let tmp = dic["production_countries"] as? NSArray{
+            if tmp.count > 0{
+                if let dicTmp = tmp[0] as? NSDictionary{
+                    if let tmpName = dicTmp["name"] as? String{
+                        oneMovie.country = tmpName
+                    }
+                }
+            }
+        }
+        if let tmp = dic["spoken_languages"] as? NSArray{
+            if tmp.count > 0{
+                if let dicTmp = tmp[0] as? NSDictionary{
+                    if let tmpName = dicTmp["name"] as? String{
+                        oneMovie.language = tmpName
+                    }
+                }
             }
         }
         
@@ -104,5 +127,5 @@ class SearchMovieNetTask: BaseNetTask {
         }
         return infoList
     }
-
+    
 }
