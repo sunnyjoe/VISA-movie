@@ -41,7 +41,6 @@ class NetWorkHandler: NSObject {
             }
         }
         
-        
         if task.method() == HTTPTaskMethod.Post {
             httpManager = httpJSONManager
             httpManager.POST(wholeURL, parameters: task.query(), success: successWrapper, failure: failedWrapper)

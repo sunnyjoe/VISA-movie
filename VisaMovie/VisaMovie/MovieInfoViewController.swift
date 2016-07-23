@@ -146,7 +146,8 @@ class MovieInfoViewController: UIViewController {
         if let cN = movieInfo.companyName{
             textInfoView.companyLabel.text = "Company: " + cN
         }
-        if let tmp = movieInfo.overview{
+        let tmp = movieInfo.overview
+        if tmp != nil && tmp != " "{
             textInfoView.overviewLabel.text = tmp
         }else{
             textInfoView.overviewLabel.text = "Not Available."

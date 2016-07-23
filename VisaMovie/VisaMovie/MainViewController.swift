@@ -46,15 +46,23 @@ class MainViewController: UIViewController {
     func sendSearchNetTask(){
         yearTF.resignFirstResponder()
         
+        if yearTF.text != nil{
+            yearTF.text = yearTF.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        }
+        
         let one = SearchMovieNetTask()
         if let tmp = yearTF.text{
-            let year = checkYearFormat(tmp)
-            if year > 0{
-                one.yearRelased = year
-            }else{
+            var year : Int?
+            let cnt = ([Character](tmp.characters)).count
+            let notDigits = NSCharacterSet.decimalDigitCharacterSet().invertedSet
+            if (cnt != 0 && cnt != 4) || tmp.rangeOfCharacterFromSet(notDigits) != nil {
                 MBProgressHUD.showHUDAddedTo(self.view, text: "Check Year Format.", duration: 1)
                 return
             }
+            if cnt != 0{
+                year = Int(tmp)
+            }
+            one.yearRelased = year
         }
         if let tmp = selectedGenre{
             one.genre = tmp.id
@@ -84,22 +92,12 @@ class MainViewController: UIViewController {
         NetWorkHandler.sharedInstance.sendNetTask(one)
     }
     
-    func checkYearFormat(input : String) -> Int {
-        let notDigits = NSCharacterSet.decimalDigitCharacterSet().invertedSet
-        let n = input.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-
-        if let _ = n.rangeOfCharacterFromSet(notDigits){
-            return 0
-        }else{
-            if Int(n) > 2100 {
-                return 0
-            }
-        }
-        return Int(n)!
-    }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        if textField.text != nil{
+            textField.text = textField.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        }
         sendSearchNetTask()
         return true
     }
@@ -158,8 +156,8 @@ extension MainViewController: GenreListViewDelegate, UITextFieldDelegate, MovieL
         yearTF.placeholder = "Year"
         yearTF.text = "2016"
         yearTF.textAlignment = .Center
-//        yearTF.layer.borderWidth = 0.5
-//        yearTF.layer.borderColor = UIColor(fromHexString: "cecece").CGColor
+        //        yearTF.layer.borderWidth = 0.5
+        //        yearTF.layer.borderColor = UIColor(fromHexString: "cecece").CGColor
         yearTF.returnKeyType = .Done
         yearTF.keyboardType = .DecimalPad
         yearTF.delegate = self
@@ -169,9 +167,9 @@ extension MainViewController: GenreListViewDelegate, UITextFieldDelegate, MovieL
         containView.addSubview(borderV2)
         
         
-       // let borderV = UIView(frame : CGRectMake(0, 63.5, view.frame.size.width, 0.5))
+        // let borderV = UIView(frame : CGRectMake(0, 63.5, view.frame.size.width, 0.5))
         //borderV.backgroundColor = UIColor(fromHexString: "cecece")
-      //  containView.addSubview(borderV)
+        //  containView.addSubview(borderV)
         
         let searchBtn = UIButton(frame : CGRectMake(view.frame.size.width - 20 - 40, 20, 44, 44))
         searchBtn.withImage(UIImage(named: "SearchIcon"))
@@ -183,5 +181,5 @@ extension MainViewController: GenreListViewDelegate, UITextFieldDelegate, MovieL
         super.viewWillLayoutSubviews()
         movieListView.frame = CGRectMake(0, 64, view.frame.size.width, view.frame.size.height - 64)
     }
-
+    
 }

@@ -1,7 +1,6 @@
 //
 //  ViewExtensions.swift
 //
-//
 
 import UIKit
 

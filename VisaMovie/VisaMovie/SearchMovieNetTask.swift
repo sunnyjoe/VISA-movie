@@ -52,14 +52,6 @@ class MovieInfo : NSObject {
         if let tmp = dic["backdrop_path"] as? String{
             oneMovie.backdropUrl = OMDBImageBaseURL + tmp
         }
-//        if let tmp = dic["genres"] as? NSArray{
-//            for oneG in tmp {
-//                if let tmpName = oneG as? NSDictionary{
-//                   oneMovie.genres.append(MovieGenre.parseDicToGenre(tmpName))
-//                }
-//            }
-//        }
-        
         if let tmp = dic["production_companies"] as? NSArray{
             if tmp.count > 0{
                 if let dicTmp = tmp[0] as? NSDictionary{

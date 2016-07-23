@@ -1,7 +1,6 @@
 //
 //  UIImageView + MOAdditions.m
 //  
-//
 
 #import "UIView+Mozat.h"
 #import <CoreGraphics/CoreGraphics.h>
