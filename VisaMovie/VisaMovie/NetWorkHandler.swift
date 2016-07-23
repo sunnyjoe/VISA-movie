@@ -15,7 +15,6 @@ class NetWorkHandler: NSObject {
     
     let httpQueryStringManager : AFHTTPSessionManager = {
         let one = AFHTTPSessionManager(baseURL : NSURL(string: OMDBBaseURL))
-        one.responseSerializer = AFHTTPResponseSerializer()
         return one
     }()
     
