@@ -9,22 +9,24 @@
 import UIKit
 
 class SearchMovieNetTask: BaseNetTask {
-    var year : Int?
+    var yearRelased : Int?
     var genre : Int?
+    var sortBy = "vote_average.asc"
     
     override func uri() -> String!
     {
-        return "search/movie"
+        return "discover/movie"
     }
     
     override func query() -> [NSObject : AnyObject]!{
         var dic = Dictionary<String , AnyObject>()
+        if let tmp = yearRelased {
+            dic["primary_release_year"] = tmp
+        }
         if let tmp = genre {
-            dic["year"] = tmp
+            dic["with_genres"] = tmp
         }
-        if let tmp = year{
-            dic["genre"] = tmp
-        }
+        dic["sort_by"] = sortBy
         return dic
     }
 }

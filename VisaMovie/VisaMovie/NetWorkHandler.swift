@@ -10,6 +10,7 @@ import UIKit
 
 let OMDBBaseURL = "http://api.themoviedb.org/3/"
 let OMDBAPIKey = "48b76c860a67d611af57a22d6126395a"
+let OMDBImageBaseURL = "http://image.tmdb.org/t/p/w500"
 
 class NetWorkHandler: NSObject {
     static let sharedInstance = NetWorkHandler()

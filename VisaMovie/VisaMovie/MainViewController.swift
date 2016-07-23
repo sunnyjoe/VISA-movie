@@ -18,8 +18,8 @@ class MainViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         let one = SearchMovieNetTask()
+        one.yearRelased = 2000
         one.genre = 18
-        one.year = 2000
         
         one.success = {(task : NSURLSessionDataTask, responseObject : AnyObject?) -> Void in
              print(responseObject)
