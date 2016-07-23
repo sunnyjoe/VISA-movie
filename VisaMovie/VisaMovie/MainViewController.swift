@@ -10,7 +10,10 @@ import UIKit
 
 class MainViewController: UIViewController {
     var movieGenreList = [MovieGenre]()
-    let genreTable = UIScrollView()
+    
+    let genreTable = ListView(frame : CGRectMake(0, 0, 150, 250))
+    let genreBtn = UIButton()
+    let yearTF = UITextField()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +39,15 @@ class MainViewController: UIViewController {
         }
         
         NetWorkHandler.sharedInstance.sendNetTask(one)
+        
+        let topView = UIView(frame : CGRectMake(0, 0, view.frame.size.width, 64))
+        topView.backgroundColor = UIColor.lightGrayColor()
+        view.addSubview(topView)
+        buildTopView(topView)
+    }
+    
+    func searchBtnDidTapped(){
+        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -47,7 +59,34 @@ class MainViewController: UIViewController {
         super.viewWillDisappear(animated)
         navigationController?.navigationBarHidden = false
     }
+
+}
+
+
+extension MainViewController{
+    func buildTopView(containView : UIView){
+        genreBtn.frame = CGRectMake(10, 20, 150, 44)
+        genreBtn.setTitleColor(UIColor.blackColor(), forState: .Normal)
+        genreBtn.setTitle("Select a genre", forState: .Normal)
+        containView.addSubview(genreBtn)
+        genreBtn.addTarget(self, action: #selector(genreBtnDidTapped), forControlEvents: .TouchUpInside)
+        genreBtn.layer.borderColor = UIColor.blackColor().CGColor
+        genreBtn.layer.borderWidth = 0.5
+        
+        yearTF.frame = CGRectMake(180, 25, 100, 30)
+        yearTF.placeholder = "Year(2016)"
+        yearTF.layer.borderColor = UIColor.blackColor().CGColor
+        yearTF.layer.borderWidth = 0.5
+        containView.addSubview(yearTF)
+        
+        let searchBtn = UIButton(frame : CGRectMake(290, 20, 55, 44))
+        searchBtn.setTitleColor(UIColor.blackColor(), forState: .Normal)
+        searchBtn.setTitle("Search", forState: .Normal)
+        containView.addSubview(searchBtn)
+        searchBtn.addTarget(self, action: #selector(searchBtnDidTapped), forControlEvents: .TouchUpInside)
+    }
     
-
-
+    func genreBtnDidTapped() {
+        
+    }
 }
