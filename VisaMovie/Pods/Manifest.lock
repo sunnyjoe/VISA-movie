@@ -14,16 +14,19 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
+  - Cartography (0.6.0)
   - SwiftyJSON (2.3.2)
 
 DEPENDENCIES:
   - AFNetworking
+  - Cartography
   - SwiftyJSON
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  Cartography: 70af183a248547694a8cfaa6b989cb7e04589985
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-PODFILE CHECKSUM: 0d312325e34b3b12b0d8cf33655c518a509070c6
+PODFILE CHECKSUM: f585245cb70fd1fcfd8bd7c563f42a10d9bead22
 
 COCOAPODS: 1.0.1

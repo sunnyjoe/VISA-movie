@@ -13,6 +13,8 @@ class MainViewController: UIViewController {
     let genreBtn = UIButton()
     let yearTF = UITextField()
     
+    let movieListView = MovieListView()
+    
     var selectedGenre : MovieGenre?
     
     override func viewDidLoad() {
@@ -20,14 +22,13 @@ class MainViewController: UIViewController {
         
         let one = GenreListNetTask()
         one.success = {(task : NSURLSessionDataTask, responseObject : AnyObject?) -> Void in
-            print(responseObject)
             if let data = responseObject as? NSDictionary {
                 let movieGenreList = GenreListNetTask.parseResultToGenreList(data)
                 self.resetGenreList(movieGenreList)
             }
         }
         one.failed = {(task : NSURLSessionDataTask?, error : NSError) -> Void in
-            print("failed")
+            print("GenreListNetTask failed")
             print(error.description)
         }
         
@@ -37,6 +38,14 @@ class MainViewController: UIViewController {
         topView.backgroundColor = UIColor.lightGrayColor()
         view.addSubview(topView)
         buildTopView(topView)
+        
+        movieListView.delegate = self
+        view.addSubview(movieListView)
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        movieListView.frame = CGRectMake(0, 64, view.frame.size.width, view.frame.size.height - 64)
     }
     
     func searchBtnDidTapped(){
@@ -51,14 +60,13 @@ class MainViewController: UIViewController {
         }
         
         one.success = {(task : NSURLSessionDataTask, responseObject : AnyObject?) -> Void in
-            print(responseObject)
-            //            if let data = responseObject as? NSDictionary {
-            //                self.movieGenreList = GenreListNetTask.parseResultToGenreList(data)
-            //            }
-            
+            if let data = responseObject as? NSDictionary {
+                self.movieListView.movieInfoList = SearchMovieNetTask.parseResultToMovieInfoList(data)
+                self.movieListView.reloadData()
+            }
         }
         one.failed = {(task : NSURLSessionDataTask?, error : NSError) -> Void in
-            print("failed")
+            print("SearchMovieNetTask failed")
             print(error.description)
         }
         
@@ -79,7 +87,7 @@ class MainViewController: UIViewController {
 }
 
 
-extension MainViewController: GenreListViewDelegate, UITextFieldDelegate{
+extension MainViewController: GenreListViewDelegate, UITextFieldDelegate, MovieListViewDelegate{
     func buildTopView(containView : UIView){
         genreBtn.frame = CGRectMake(10, 20, 150, 44)
         genreBtn.setTitleColor(UIColor.blackColor(), forState: .Normal)
@@ -129,6 +137,10 @@ extension MainViewController: GenreListViewDelegate, UITextFieldDelegate{
             genreBtn.setTitle("All", forState: .Normal)
         }
         genreBtnDidTapped()
+    }
+    
+    func movieListViewDidSelectMovie(movieInfo: MovieInfo?, listView: MovieListView) {
+         
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {

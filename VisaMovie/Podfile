@@ -8,5 +8,5 @@ target 'VisaMovie' do
   # Pods for VisaMovie
   pod 'SwiftyJSON'
   pod 'AFNetworking'
-
+  pod 'Cartography'
 end

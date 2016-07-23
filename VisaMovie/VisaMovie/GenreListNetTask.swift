@@ -28,7 +28,6 @@ class GenreListNetTask: BaseNetTask {
                     let oneGenre = MovieGenre()
                     if let tmp = dic["id"] as? Int{
                         oneGenre.id = tmp
-                        print(tmp)
                     }
                     if let tmp = dic["name"] as? String{
                         oneGenre.name = tmp

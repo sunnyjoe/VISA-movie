@@ -10,7 +10,7 @@ import UIKit
 
 
 protocol MovieListViewDelegate : NSObjectProtocol{
-    func movieListViewDidSelectGenre(movieInfo : MovieInfo?, listView : MovieListView)
+    func movieListViewDidSelectMovie(movieInfo : MovieInfo?, listView : MovieListView)
 }
 
 let MovieListViewReuseCellName = "MovieListViewReuseCellName"
@@ -51,7 +51,7 @@ extension MovieListView : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 61
+        return 200
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -60,14 +60,14 @@ extension MovieListView : UITableViewDelegate, UITableViewDataSource {
             cell = tmp
         }
         
-        let oneContact = movieInfoList[indexPath.row]
+        let oneMovie = movieInfoList[indexPath.row]
         
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let oneContact = movieInfoList[indexPath.row]
-        delegate?.movieListViewDidSelectGenre(oneContact, listView: self)
+        delegate?.movieListViewDidSelectMovie(oneContact, listView: self)
     }
     
 }
