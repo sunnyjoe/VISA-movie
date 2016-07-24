@@ -11,6 +11,7 @@ import UIKit
 class MovieInfo : NSObject {
     var id = 0
     var adult : Bool?
+    var popularity : Double?
     var title = ""
     var genreIds : [Int]?
     var rating : Int?
@@ -32,6 +33,9 @@ class MovieInfo : NSObject {
         }
         if let tmp = dic["id"] as? Int{
             oneMovie.id = tmp
+        }
+        if let tmp = dic["popularity"] as? Double{
+            oneMovie.popularity = tmp
         }
         if let tmp = dic["title"] as? String{
             oneMovie.title = tmp

@@ -84,12 +84,15 @@ extension MovieListView : UITableViewDelegate, UITableViewDataSource {
         if poster == nil {
             poster = oneMovie.backdropUrl
         }
+        cell.clearInfo()
         cell.setInfo(poster, title: oneMovie.title, score: scoreStr, year: year, language: language)
         if let tmp = oneMovie.adult{
             cell.showRestricted(tmp)
-        }else{
-            cell.showRestricted(false)
         }
+        if let pop = oneMovie.popularity{
+            cell.popularity(String(format: "Popularity: %.\(2)f", pop))
+        }
+       
         return cell
     }
     

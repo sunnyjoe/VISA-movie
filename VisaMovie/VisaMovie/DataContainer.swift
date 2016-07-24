@@ -19,6 +19,14 @@ class DataContainer: NSObject {
     var genreList : [MovieGenre]?
     
     func getGenreList(completion : (([MovieGenre]) -> Void)){
+        if genreList != nil {
+            completion(genreList!)
+        }else{
+            if let cachedDic = getCachedGenre(){
+                genreList = GenreListNetTask.parseResultToGenreList(cachedDic)
+                completion(genreList!)
+            }
+        }
         
         var needRefreshGenre = false
         let last = getLastRefreshCachedGenreTime()
@@ -26,34 +34,20 @@ class DataContainer: NSObject {
         if cur - last > refreshGenreListInterval {
             needRefreshGenre = true
         }
-        
-        if genreList != nil {
-            completion(genreList!)
-            if !needRefreshGenre {
-                return
+        if needRefreshGenre || genreList == nil {
+            let one = GenreListNetTask()
+            one.success = {(task : NSURLSessionDataTask, responseObject : AnyObject?) -> Void in
+                if let data = responseObject as? NSDictionary {
+                    self.storeGenreDictionary(data)
+                    let movieGenreList = GenreListNetTask.parseResultToGenreList(data)
+                    completion(movieGenreList)
+                }
             }
-        }
-        if let cachedDic = getCachedGenre(){
-            genreList = GenreListNetTask.parseResultToGenreList(cachedDic)
-            completion(genreList!)
-            if !needRefreshGenre {
-                return
+            one.failed = {(task : NSURLSessionDataTask?, error : NSError) -> Void in
+                print(error.description)
             }
+            NetWorkHandler.sharedInstance.sendNetTask(one)
         }
-        
-        let one = GenreListNetTask()
-        one.success = {(task : NSURLSessionDataTask, responseObject : AnyObject?) -> Void in
-            if let data = responseObject as? NSDictionary {
-                self.storeGenreDictionary(data)
-                let movieGenreList = GenreListNetTask.parseResultToGenreList(data)
-                completion(movieGenreList)
-            }
-        }
-        one.failed = {(task : NSURLSessionDataTask?, error : NSError) -> Void in
-            print(error.description)
-        }
-        
-        NetWorkHandler.sharedInstance.sendNetTask(one)
     }
     
     func getGenreNamesFromId(ids : [Int]?, completion : ((String?) -> Void)) {

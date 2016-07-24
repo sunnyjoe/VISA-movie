@@ -15,13 +15,14 @@ class MoviewTableViewCell: UITableViewCell {
     let dateLabel = UILabel()
     let languageLabel = UILabel()
     
+    let popularityLabel = UILabel()
     let adultIV = UIImageView()
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         clipsToBounds = true
-        addSubviews(imgIV, titleLabel,dateLabel,scoreLabel, languageLabel, adultIV)
+        addSubviews(imgIV, titleLabel,dateLabel,scoreLabel, languageLabel, adultIV, popularityLabel)
         
         imgIV.clipsToBounds = true
         imgIV.contentMode = .ScaleAspectFill
@@ -49,12 +50,15 @@ class MoviewTableViewCell: UITableViewCell {
         languageLabel.numberOfLines = 0
         languageLabel.withFontHeletica(fontSize).withTextColor(UIColor.defaultBlack())
         
+        popularityLabel.numberOfLines = 1
+        popularityLabel.withFontHeletica(fontSize).withTextColor(UIColor.defaultBlack())
+        
         adultIV.image = UIImage(named: "RestrictIcon")
         let borderV = UIView()
         borderV.backgroundColor = UIColor(fromHexString: "cecece")
         addSubview(borderV)
         
-        constrain(titleLabel,imgIV, scoreLabel, dateLabel, languageLabel) { titleLabel, imgIV, scoreLabel, dateLabel, language in
+        constrain(titleLabel, imgIV, scoreLabel, popularityLabel, dateLabel) { titleLabel, imgIV, scoreLabel, popularityLabel, dateLabel in
             titleLabel.left == imgIV.right + 10
             titleLabel.right == titleLabel.superview!.right - 20
             titleLabel.top == titleLabel.superview!.top + 15
@@ -62,16 +66,20 @@ class MoviewTableViewCell: UITableViewCell {
             scoreLabel.left == titleLabel.left
             scoreLabel.top == titleLabel.bottom + 8
 
+            popularityLabel.left == titleLabel.left
+            popularityLabel.right == popularityLabel.superview!.right - 20
+            popularityLabel.top == scoreLabel.bottom + 8
+          
             dateLabel.left == titleLabel.left
             dateLabel.right == dateLabel.superview!.right - 20
-            dateLabel.top == scoreLabel.bottom + 8
-          
-            language.left == titleLabel.left
-            language.right == language.superview!.right - 20
-            language.top == dateLabel.bottom + 8
+            dateLabel.top == popularityLabel.bottom + 8
         }
         
-        constrain(languageLabel, adultIV, borderV) {languageLabel, adultIV, borderV in
+        constrain(dateLabel, languageLabel, adultIV, borderV) {dateLabel, languageLabel, adultIV, borderV in
+            languageLabel.left == dateLabel.left
+            languageLabel.right == languageLabel.superview!.right - 20
+            languageLabel.top == dateLabel.bottom + 8
+            
             adultIV.left == languageLabel.left
             adultIV.top == languageLabel.bottom + 5
             adultIV.width == 42
@@ -88,8 +96,6 @@ class MoviewTableViewCell: UITableViewCell {
     }
     
     func setInfo(urlStr : String?, title : String?, score : String?, year : String?, language : String?){
-        imgIV.image = UIImage(named: "PosterPlaceHolder")
-        
         imgIV.sd_setImageWithURLStr(urlStr)
         scoreLabel.text = score
         titleLabel.text = title
@@ -99,6 +105,20 @@ class MoviewTableViewCell: UITableViewCell {
     
     func showRestricted(show : Bool){
         adultIV.hidden = !show
+    }
+    
+    func popularity(str : String?){
+        popularityLabel.text = str
+    }
+    
+    func clearInfo(){
+        imgIV.image = UIImage(named: "PosterPlaceHolder")
+        scoreLabel.text = nil
+        titleLabel.text = nil
+        dateLabel.text = nil
+        languageLabel.text = nil
+        popularityLabel.text = nil
+        adultIV.hidden = true
     }
     
     required init?(coder aDecoder: NSCoder) {
