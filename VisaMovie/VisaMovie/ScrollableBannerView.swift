@@ -7,8 +7,8 @@
 import UIKit
 
 protocol ScrollableBannerViewDelegate : NSObjectProtocol{
-    func scrollableBannerView(bannerView : ScrollableBannerView, didTapImage : UIImage)
-    func scrollableBannerViewStartScroll(bannerView : ScrollableBannerView)
+    func scrollableBannerView(bannerView : ScrollableBannerView, didIndex : Int)
+    //  func scrollableBannerViewStartScroll(bannerView : ScrollableBannerView)
     
 }
 
@@ -49,7 +49,7 @@ class ScrollableBannerView: UIView, UIScrollViewDelegate {
     func startTimer(){
         timer?.invalidate()
         timer = nil
-
+        
         timer = NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: #selector(scrollToNextPage), userInfo: nil, repeats: true)
     }
     
@@ -68,6 +68,15 @@ class ScrollableBannerView: UIView, UIScrollViewDelegate {
         }
     }
     
+    func scrollToPage(index : Int){
+        if index < 0 {return}
+        
+        let totalPage = scrollView.contentSize.width / max(pageWidth, 1)
+        if index >= Int(totalPage) {return}
+        
+        scrollView.setContentOffset(CGPointMake(CGFloat(index) * pageWidth, 0), animated: false)
+    }
+    
     func setScrollImages(imageUrls : [String], fill : Bool = true){
         scrollView.removeAllSubViews()
         self.imageUrls = imageUrls
@@ -75,12 +84,12 @@ class ScrollableBannerView: UIView, UIScrollViewDelegate {
         var oX : CGFloat = 0
         for one in imageUrls{
             let btn = UIButton(frame: CGRectMake(oX, 0, frame.size.width, frame.size.height))
-          //  btn.addTarget(self, action: #selector(imageViewDidTapped(_:)), forControlEvents: .TouchUpInside)
+            btn.addTarget(self, action: #selector(imageViewDidTapped(_:)), forControlEvents: .TouchUpInside)
             btn.backgroundColor = UIColor.whiteColor()
             let imageV = UIImageView(frame: btn.bounds)
             btn.addSubview(imageV)
             btn.clipsToBounds = true
-           // btn.property = imageV
+            // btn.property = imageV
             imageV.sd_setImageWithURLStr(one)
             imageV.contentMode = .ScaleAspectFit
             if !fill {
@@ -104,20 +113,14 @@ class ScrollableBannerView: UIView, UIScrollViewDelegate {
         }
     }
     
-//    func imageViewDidTapped(sender : UIButton){
-//        if let tmp = sender.property{
-//            if let iv = tmp as? UIImageView{
-//                if let image = iv.image{
-//                    self.delegate?.scrollableBannerView(self, didTapImage: image)
-//                }
-//            }
-//        }
-//    }
-    
-    func scrollViewWillBeginDragging(scrollView : UIScrollView)
-    {
-        self.delegate?.scrollableBannerViewStartScroll(self)
+    func imageViewDidTapped(sender : UIButton){
+        self.delegate?.scrollableBannerView(self, didIndex: pageControl.currentPage)
     }
+    
+    //    func scrollViewWillBeginDragging(scrollView : UIScrollView)
+    //    {
+    //        self.delegate?.scrollableBannerViewStartScroll(self)
+    //    }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
         if scrollView.frame.size.width <= 0 {

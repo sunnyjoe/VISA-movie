@@ -35,6 +35,7 @@ class MovieInfoViewController: UIViewController {
         scrollView.contentInset = UIEdgeInsetsMake(0, 0, 23, 0)
         view.addSubview(scrollView)
         
+        bannerView.delegate = self
         bannerView.frame = CGRectMake(0, 0, view.frame.size.width, view.frame.size.height * 0.617)
         textInfoView.frame = CGRectMake(0, CGRectGetMaxY(bannerView.frame) + 8, view.frame.size.width, 200)
         let borderV = UIView(frame : CGRectMake(0, CGRectGetMaxY(bannerView.frame), view.frame.size.width, 0.5))
@@ -112,7 +113,7 @@ class MovieInfoViewController: UIViewController {
         NetWorkHandler.sharedInstance.sendNetTask(dNetTask)
     }
     
-    func resetUI(){
+    func getImageURLs() -> [String]{
         var banners = [String]()
         if let tmp = movieInfo.imageUrl{
             banners.append(tmp)
@@ -120,6 +121,11 @@ class MovieInfoViewController: UIViewController {
         if let tmp = movieInfo.backdropUrl{
             banners.append(tmp)
         }
+        return banners
+    }
+    
+    func resetUI(){
+        var banners = getImageURLs()
         if banners.count == 0 {
             banners.append("http://www.bingeu.com/posters/placeholder.png")
         }
@@ -163,12 +169,19 @@ class MovieInfoViewController: UIViewController {
         navigationController?.popViewControllerAnimated(true)
     }
     
-    func buildTrailerView(){
-        
-        
-    }
-    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension MovieInfoViewController : ScrollableBannerViewDelegate {
+    func scrollableBannerView(bannerView: ScrollableBannerView, didIndex: Int) {
+        let photoB = PhotoBrowser(frame : UIScreen.mainScreen().bounds)
+        photoB.resetDimissSelector(self, sel: #selector(handleUDismissPhotoBrowser(_:)))
+        photoB.showPhotoBrowser(self, imageUrls: getImageURLs(), index: didIndex)
+    }
+    
+    func handleUDismissPhotoBrowser(index : NSNumber){
+        bannerView.scrollToPage(index.integerValue)
     }
 }

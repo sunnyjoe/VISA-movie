@@ -143,7 +143,7 @@ extension PhotoBrowser: UIActionSheetDelegate{
     func zoomInWithAnim(page: Int){
         let photoModel = photoModels[page]
         
-        propImgV.frame = CGRectMake(0, 64, UIScreen.mainScreen().bounds.size.width, 302.5)
+        propImgV.frame = CGRectMake(0, 0, UIScreen.mainScreen().bounds.size.width, UIScreen.mainScreen().bounds.size.height * 0.617)
         vc.view.addSubview(propImgV)
         
         if let cachedImage = SDImageCache.sharedImageCache().imageFromDiskCacheForKey(photoModel.hostHDImgURL){
@@ -171,6 +171,7 @@ extension PhotoBrowser: UIActionSheetDelegate{
             }, completion: {(Bool) -> Void in
                 self.collectionView.alpha = 1
                 self.propImgV.removeFromSuperview()
+                self.collectionView.setContentOffset(CGPointMake((self.frame.size.width + 20) * CGFloat(self.showIndex), 0), animated: false)
         })
     }
     
@@ -215,7 +216,6 @@ extension PhotoBrowser: UIActionSheetDelegate{
         if vc.navigationController != nil {vc.navigationController?.navigationBarHidden = isNavBarHidden}
         if vc.tabBarController != nil {vc.tabBarController?.tabBar.hidden = isTabBarHidden}
         
-        scrollToNewPage()
         zoomOutWithAnim(page)
         
         NSUserDefaults.standardUserDefaults().setBool(false, forKey: CFPBShowKey)
@@ -243,8 +243,11 @@ extension PhotoBrowser: UIActionSheetDelegate{
         vc.view.addSubview(propImgV)
         collectionView.alpha = 0
         
-        UIView.animateWithDuration(0.3, delay: 0, options: [], animations: {
-            self.propImgV.frame = CGRectMake(0, 0, UIScreen.mainScreen().bounds.size.width, 302.5)
+        let showSize = CGSize.decisionShowSize(propImgV.image!.size, contentSize: vc.view.bounds.size)
+        propImgV.bounds = CGRectMake(0, 0, showSize.width, showSize.height)
+        
+        UIView.animateWithDuration(0.2, delay: 0, options: [], animations: {
+            self.propImgV.frame = CGRectMake(0, 0, UIScreen.mainScreen().bounds.size.width, UIScreen.mainScreen().bounds.size.height * 0.617)
             self.alpha = 0
         }) { (complete) -> Void in
             self.propImgV.removeFromSuperview()
