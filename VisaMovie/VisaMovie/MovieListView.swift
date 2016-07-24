@@ -85,7 +85,11 @@ extension MovieListView : UITableViewDelegate, UITableViewDataSource {
             poster = oneMovie.backdropUrl
         }
         cell.setInfo(poster, title: oneMovie.title, score: scoreStr, year: year, language: language)
-        
+        if let tmp = oneMovie.adult{
+            cell.showRestricted(tmp)
+        }else{
+            cell.showRestricted(false)
+        }
         return cell
     }
     

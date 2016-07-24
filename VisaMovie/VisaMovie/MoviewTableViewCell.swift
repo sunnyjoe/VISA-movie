@@ -15,11 +15,13 @@ class MoviewTableViewCell: UITableViewCell {
     let dateLabel = UILabel()
     let languageLabel = UILabel()
     
+    let adultIV = UIImageView()
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         clipsToBounds = true
-        addSubviews(imgIV, titleLabel,dateLabel,scoreLabel, languageLabel)
+        addSubviews(imgIV, titleLabel,dateLabel,scoreLabel, languageLabel, adultIV)
         
         imgIV.clipsToBounds = true
         imgIV.contentMode = .ScaleAspectFill
@@ -47,6 +49,7 @@ class MoviewTableViewCell: UITableViewCell {
         languageLabel.numberOfLines = 0
         languageLabel.withFontHeletica(fontSize).withTextColor(UIColor.defaultBlack())
         
+        adultIV.image = UIImage(named: "RestrictIcon")
         let borderV = UIView()
         borderV.backgroundColor = UIColor(fromHexString: "cecece")
         addSubview(borderV)
@@ -58,18 +61,22 @@ class MoviewTableViewCell: UITableViewCell {
             
             scoreLabel.left == titleLabel.left
             scoreLabel.top == titleLabel.bottom + 8
-//
+
             dateLabel.left == titleLabel.left
             dateLabel.right == dateLabel.superview!.right - 20
             dateLabel.top == scoreLabel.bottom + 8
-         //   overviewLabel.bottom == overviewLabel.superview!.bottom - 10
-            
+          
             language.left == titleLabel.left
             language.right == language.superview!.right - 20
             language.top == dateLabel.bottom + 8
         }
         
-        constrain(borderV) {borderV in
+        constrain(languageLabel, adultIV, borderV) {languageLabel, adultIV, borderV in
+            adultIV.left == languageLabel.left
+            adultIV.top == languageLabel.bottom + 5
+            adultIV.width == 42
+            adultIV.height == 42
+            
             borderV.left == borderV.superview!.left + 20
             borderV.right == borderV.superview!.right - 20
             borderV.height == 0.5
@@ -88,6 +95,10 @@ class MoviewTableViewCell: UITableViewCell {
         titleLabel.text = title
         dateLabel.text = year
         languageLabel.text = language
+    }
+    
+    func showRestricted(show : Bool){
+        adultIV.hidden = !show
     }
     
     required init?(coder aDecoder: NSCoder) {

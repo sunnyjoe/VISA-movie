@@ -143,7 +143,7 @@ class MainViewController: UIViewController {
 
 extension MainViewController: GenreListViewDelegate, UITextFieldDelegate, MovieListViewDelegate{
     func buildTopView(containView : UIView){
-        genreBtn.frame = CGRectMake(20, 20, 150, 44)
+        genreBtn.frame = CGRectMake(18, 20, 150, 44)
         genreBtn.setTitleColor(UIColor.blackColor(), forState: .Normal)
         genreBtn.setTitle("Select a genre", forState: .Normal)
         containView.addSubview(genreBtn)

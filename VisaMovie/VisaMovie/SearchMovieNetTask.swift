@@ -13,7 +13,6 @@ class MovieInfo : NSObject {
     var adult : Bool?
     var title = ""
     var genreIds : [Int]?
-  //  var genres = [MovieGenre]()
     var rating : Int?
     var releaseDate : String?
     var imageUrl : String?
