@@ -57,7 +57,7 @@ extension MovieListView : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 200
+        return 220
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -75,7 +75,16 @@ extension MovieListView : UITableViewDelegate, UITableViewDataSource {
         if oneMovie.releaseDate != nil {
             year = "Date: " + oneMovie.releaseDate!
         }
-        cell.setInfo(oneMovie.imageUrl, title: oneMovie.title, score: scoreStr, year: year)
+        var language : String?
+        if let lan = oneMovie.language {
+            language = "Language: " + lan
+        }
+        
+        var poster = oneMovie.imageUrl
+        if poster == nil {
+            poster = oneMovie.backdropUrl
+        }
+        cell.setInfo(poster, title: oneMovie.title, score: scoreStr, year: year, language: language)
         
         return cell
     }

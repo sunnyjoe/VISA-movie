@@ -44,7 +44,8 @@ class MovieInfoViewController: UIViewController {
         scrollView.addSubview(textInfoView)
         scrollView.addSubview(borderV)
         
-        ytPlayer.backgroundColor = UIColor.defaultBlack()
+        ytPlayer.layer.borderColor = UIColor.defaultBlack().CGColor
+        ytPlayer.layer.borderWidth = 0.5
         view.addSubview(ytPlayer)
         ytPlayer.frame = CGRectMake(view.frame.size.width - 200, view.frame.size.height - 140, 200, 140)
         ytPlayer.hidden = true

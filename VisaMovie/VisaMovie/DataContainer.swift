@@ -9,6 +9,9 @@
 import UIKit
 
 let cachedGenreKey = "cachedGenreKey"
+let cachedGenreTimeKey = "cachedGenreTimeKey"
+
+let refreshGenreListInterval = 24 * 3600 * 1000 * 10 //10 days
 
 class DataContainer: NSObject {
     static let sharedInstace = DataContainer()
@@ -29,12 +32,12 @@ class DataContainer: NSObject {
         let one = GenreListNetTask()
         one.success = {(task : NSURLSessionDataTask, responseObject : AnyObject?) -> Void in
             if let data = responseObject as? NSDictionary {
+                self.storeGenreDictionary(data)
                 let movieGenreList = GenreListNetTask.parseResultToGenreList(data)
                 completion(movieGenreList)
             }
         }
         one.failed = {(task : NSURLSessionDataTask?, error : NSError) -> Void in
-            print("GenreListNetTask failed")
             print(error.description)
         }
         
@@ -77,4 +80,16 @@ extension DataContainer {
         NSUserDefaults.standardUserDefaults().synchronize()
     }
     
+    private func getLastRefreshCachedGenreTime() -> UInt64{
+        if let tmp = NSUserDefaults.standardUserDefaults().objectForKey(cachedGenreTimeKey){
+            let n = tmp as! NSNumber
+            return n.unsignedLongLongValue
+        }
+        return 0
+    }
+    
+    private func storeLastRefreshGenreListTime(time : UInt64){
+        NSUserDefaults.standardUserDefaults().setObject(NSNumber(unsignedLongLong: time), forKey: cachedGenreTimeKey)
+        NSUserDefaults.standardUserDefaults().synchronize()
+    }
 }

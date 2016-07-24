@@ -80,6 +80,13 @@ class MovieInfo : NSObject {
             }
         }
         
+        if oneMovie.language == nil {
+            if let tmp = dic["original_language"] as? String{
+                let locale = NSLocale.init(localeIdentifier: tmp)
+                oneMovie.language = locale.displayNameForKey(NSLocaleIdentifier, value: tmp)
+            }
+        }
+        
         return oneMovie
     }
 }

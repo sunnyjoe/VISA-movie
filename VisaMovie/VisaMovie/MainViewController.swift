@@ -44,8 +44,6 @@ class MainViewController: UIViewController {
     }
     
     func sendSearchNetTask(){
-        yearTF.resignFirstResponder()
-        
         if yearTF.text != nil{
             yearTF.text = yearTF.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
         }
@@ -67,6 +65,8 @@ class MainViewController: UIViewController {
         if let tmp = selectedGenre{
             one.genre = tmp.id
         }
+        
+        yearTF.resignFirstResponder()
         
         MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         one.success = {(task : NSURLSessionDataTask, responseObject : AnyObject?) -> Void in
@@ -143,12 +143,12 @@ class MainViewController: UIViewController {
 
 extension MainViewController: GenreListViewDelegate, UITextFieldDelegate, MovieListViewDelegate{
     func buildTopView(containView : UIView){
-        genreBtn.frame = CGRectMake(10, 20, 150, 44)
+        genreBtn.frame = CGRectMake(20, 20, 150, 44)
         genreBtn.setTitleColor(UIColor.blackColor(), forState: .Normal)
         genreBtn.setTitle("Select a genre", forState: .Normal)
         containView.addSubview(genreBtn)
         genreBtn.addTarget(self, action: #selector(genreBtnDidTapped), forControlEvents: .TouchUpInside)
-        let borderV1 = UIView(frame : CGRectMake(genreBtn.frame.origin.x, 57, genreBtn.frame.size.width, 0.5))
+        let borderV1 = UIView(frame : CGRectMake(genreBtn.frame.origin.x, 57, genreBtn.frame.size.width, 0.75))
         borderV1.backgroundColor = UIColor(fromHexString: "cecece")
         containView.addSubview(borderV1)
         
@@ -156,20 +156,13 @@ extension MainViewController: GenreListViewDelegate, UITextFieldDelegate, MovieL
         yearTF.placeholder = "Year"
         yearTF.text = "2016"
         yearTF.textAlignment = .Center
-        //        yearTF.layer.borderWidth = 0.5
-        //        yearTF.layer.borderColor = UIColor(fromHexString: "cecece").CGColor
         yearTF.returnKeyType = .Done
         yearTF.keyboardType = .DecimalPad
         yearTF.delegate = self
         containView.addSubview(yearTF)
-        let borderV2 = UIView(frame : CGRectMake(yearTF.frame.origin.x, 57, yearTF.frame.size.width, 0.5))
+        let borderV2 = UIView(frame : CGRectMake(yearTF.frame.origin.x, 57, yearTF.frame.size.width, 0.75))
         borderV2.backgroundColor = UIColor(fromHexString: "cecece")
         containView.addSubview(borderV2)
-        
-        
-        // let borderV = UIView(frame : CGRectMake(0, 63.5, view.frame.size.width, 0.5))
-        //borderV.backgroundColor = UIColor(fromHexString: "cecece")
-        //  containView.addSubview(borderV)
         
         let searchBtn = UIButton(frame : CGRectMake(view.frame.size.width - 20 - 40, 20, 44, 44))
         searchBtn.withImage(UIImage(named: "SearchIcon"))
