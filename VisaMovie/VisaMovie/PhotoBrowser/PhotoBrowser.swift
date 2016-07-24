@@ -42,7 +42,7 @@ class PhotoBrowser: UIView {
     var dismissBtn,saveBtn: UIButton!
     var isHiddenBar: Bool = false
     
-    deinit{NSNotificationCenter.defaultCenter().removeObserver(self);print("deinit")}
+    deinit{NSNotificationCenter.defaultCenter().removeObserver(self);}
     
     lazy var hud: UILabel = {
         let hud = UILabel()
