@@ -73,8 +73,35 @@ class MovieInfoView: UIView {
         }
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    func resetLabels(movieInfo : MovieInfo){
+        titleLabel.text = movieInfo.title
+        if let rate = movieInfo.rating {
+            scoreLabel.text = "Score: \(rate)"
+        }
+        
+        if let lan = movieInfo.language{
+            languageLabel.text = "Language: " + lan
+        }
+        
+        let completion = {(name : String?) -> Void in
+            if name != nil {
+                self.genreLabel.text = "Genres: " + name!
+            }
+        }
+        DataContainer.sharedInstace.getGenreNamesFromId(movieInfo.genreIds, completion: completion)
+        
+        if let ct = movieInfo.country{
+            contryLabel.text = "Country: " + ct
+        }
+        if let cN = movieInfo.companyName{
+            companyLabel.text = "Company: " + cN
+        }
+        let tmp = movieInfo.overview
+        if tmp != nil && tmp != " "{
+            overviewLabel.text = tmp
+        }else{
+            overviewLabel.text = "Not Available."
+        }
     }
     
     func getViewHeight() -> CGFloat{

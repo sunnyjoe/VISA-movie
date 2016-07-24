@@ -8,7 +8,8 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
+class MainViewController: UIViewController, GenreListViewDelegate, UITextFieldDelegate, MovieListViewDelegate{
+    
     let genreListView = GenreListView(frame : UIScreen.mainScreen().bounds)
     let genreBtn = UIButton()
     let yearTF = UITextField()
@@ -16,7 +17,12 @@ class MainViewController: UIViewController {
     let movieListView = MovieListView()
     var selectedGenre : MovieGenre?
     
-    var noResultLabel = UILabel()
+    lazy var noResultLabel : UILabel = {
+        let label = UILabel(frame : CGRectMake(0, 100, self.view.frame.size.width, 30))
+        label.withText("No movies found.").withFontHeletica(16).textCentered().withTextColor(UIColor.defaultBlack())
+        return label
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -24,6 +30,7 @@ class MainViewController: UIViewController {
             self.resetGenreList(list)
         }
         DataContainer.sharedInstace.getGenreList(completion)
+        genreListView.delegate = self
         
         let topView = UIView(frame : CGRectMake(0, 0, view.frame.size.width, 64))
         view.addSubview(topView)
@@ -31,9 +38,6 @@ class MainViewController: UIViewController {
         
         movieListView.delegate = self
         view.addSubview(movieListView)
-        
-        noResultLabel.withText("No movies found.").withFontHeletica(16).textCentered().withTextColor(UIColor.defaultBlack())
-        noResultLabel.frame = CGRectMake(0, 100, view.frame.size.width, 30)
         
         sendSearchNetTask()
     }
@@ -92,7 +96,6 @@ class MainViewController: UIViewController {
         NetWorkHandler.sharedInstance.sendNetTask(one)
     }
     
-    
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         if textField.text != nil{
@@ -113,7 +116,6 @@ class MainViewController: UIViewController {
     }
     
     func resetGenreList(movieGenreList : [MovieGenre]){
-        genreListView.delegate = self
         genreListView.movieGenreList = movieGenreList
         genreListView.reloadData()
     }
@@ -141,7 +143,7 @@ class MainViewController: UIViewController {
     }
 }
 
-extension MainViewController: GenreListViewDelegate, UITextFieldDelegate, MovieListViewDelegate{
+extension MainViewController{
     func buildTopView(containView : UIView){
         genreBtn.frame = CGRectMake(18, 20, 150, 44)
         genreBtn.setTitleColor(UIColor.blackColor(), forState: .Normal)

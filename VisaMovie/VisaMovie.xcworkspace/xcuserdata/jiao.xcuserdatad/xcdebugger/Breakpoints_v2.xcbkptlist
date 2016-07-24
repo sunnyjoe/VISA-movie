@@ -425,70 +425,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "VisaMovie/MovieInfoViewController.swift"
-            timestampString = "491038422.992713"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "142"
-            endingLineNumber = "142"
-            landmarkName = "resetUI()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "VisaMovie/MovieInfoViewController.swift"
-            timestampString = "491038422.992713"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "145"
-            endingLineNumber = "145"
-            landmarkName = "resetUI()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "VisaMovie/MovieInfoViewController.swift"
-            timestampString = "491038422.992713"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "151"
-            endingLineNumber = "151"
-            landmarkName = "resetUI()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "VisaMovie/MovieInfoViewController.swift"
-            timestampString = "491038422.992713"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "140"
-            endingLineNumber = "140"
-            landmarkName = "resetUI()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "VisaMovie/SearchMovieNetTask.swift"
             timestampString = "491024311.394156"
             startingColumnNumber = "9223372036854775807"
@@ -842,11 +778,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "VisaMovie/MovieInfoViewController.swift"
-            timestampString = "491038422.992713"
+            timestampString = "491063692.148973"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "128"
-            endingLineNumber = "128"
+            startingLineNumber = "129"
+            endingLineNumber = "129"
             landmarkName = "resetUI()"
             landmarkType = "5">
          </BreakpointContent>
@@ -858,11 +794,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "VisaMovie/MovieInfoViewController.swift"
-            timestampString = "491038422.992713"
+            timestampString = "491063692.148973"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "165"
-            endingLineNumber = "165"
+            startingLineNumber = "139"
+            endingLineNumber = "139"
             landmarkName = "resetUI()"
             landmarkType = "5">
          </BreakpointContent>
@@ -874,11 +810,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "VisaMovie/MovieInfoViewController.swift"
-            timestampString = "491038422.992713"
+            timestampString = "491063692.148973"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "166"
-            endingLineNumber = "166"
+            startingLineNumber = "140"
+            endingLineNumber = "140"
             landmarkName = "resetUI()"
             landmarkType = "5">
          </BreakpointContent>
@@ -970,11 +906,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "VisaMovie/MovieInfoViewController.swift"
-            timestampString = "491038422.992713"
+            timestampString = "491063692.148973"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
             landmarkName = "getMovieVideoInfo()"
             landmarkType = "5">
          </BreakpointContent>
@@ -986,11 +922,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "VisaMovie/MovieInfoViewController.swift"
-            timestampString = "491038422.992713"
+            timestampString = "491063692.148973"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "89"
-            endingLineNumber = "89"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
             landmarkName = "getMovieVideoInfo()"
             landmarkType = "5">
          </BreakpointContent>
@@ -1002,11 +938,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "VisaMovie/MovieInfoViewController.swift"
-            timestampString = "491038422.992713"
+            timestampString = "491063692.148973"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "71"
-            endingLineNumber = "71"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
             landmarkName = "getMovieVideoInfo()"
             landmarkType = "5">
             <Locations>
@@ -1050,11 +986,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "VisaMovie/MovieInfoViewController.swift"
-            timestampString = "491038422.992713"
+            timestampString = "491063692.148973"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "96"
-            endingLineNumber = "96"
+            startingLineNumber = "97"
+            endingLineNumber = "97"
             landmarkName = "getMovieDetailInfo()"
             landmarkType = "5">
          </BreakpointContent>
@@ -1066,11 +1002,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "VisaMovie/MovieInfoViewController.swift"
-            timestampString = "491038422.992713"
+            timestampString = "491063692.148973"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "110"
-            endingLineNumber = "110"
+            startingLineNumber = "111"
+            endingLineNumber = "111"
             landmarkName = "getMovieDetailInfo()"
             landmarkType = "5">
          </BreakpointContent>
@@ -1082,11 +1018,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "VisaMovie/MovieInfoViewController.swift"
-            timestampString = "491038422.992713"
+            timestampString = "491063692.148973"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "105"
-            endingLineNumber = "105"
+            startingLineNumber = "106"
+            endingLineNumber = "106"
             landmarkName = "getMovieDetailInfo()"
             landmarkType = "5">
          </BreakpointContent>
@@ -1098,44 +1034,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "VisaMovie/MovieInfoViewController.swift"
-            timestampString = "491038422.992713"
+            timestampString = "491063692.148973"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "103"
-            endingLineNumber = "103"
+            startingLineNumber = "104"
+            endingLineNumber = "104"
             landmarkName = "getMovieDetailInfo()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "VisaMovie/MovieInfoViewController.swift"
-            timestampString = "491038422.992713"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "158"
-            endingLineNumber = "158"
-            landmarkName = "resetUI()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "VisaMovie/MovieInfoViewController.swift"
-            timestampString = "491038422.992713"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "160"
-            endingLineNumber = "160"
-            landmarkName = "resetUI()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1449,11 +1353,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "VisaMovie/MovieInfoViewController.swift"
-            timestampString = "491039096.195273"
+            timestampString = "491063692.148973"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "185"
-            endingLineNumber = "185"
+            startingLineNumber = "159"
+            endingLineNumber = "159"
             landmarkName = "handleUDismissPhotoBrowser(_:)"
             landmarkType = "5">
          </BreakpointContent>

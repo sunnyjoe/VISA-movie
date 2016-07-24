@@ -45,11 +45,12 @@ class MovieInfoViewController: UIViewController {
         scrollView.addSubview(textInfoView)
         scrollView.addSubview(borderV)
         
+        ytPlayer.frame = CGRectMake(view.frame.size.width - 200, view.frame.size.height - 140, 200, 140)
         ytPlayer.layer.borderColor = UIColor.defaultBlack().CGColor
         ytPlayer.layer.borderWidth = 0.5
         view.addSubview(ytPlayer)
-        ytPlayer.frame = CGRectMake(view.frame.size.width - 200, view.frame.size.height - 140, 200, 140)
         ytPlayer.hidden = true
+        
         resetUI()
         
         getMovieDetailInfo()
@@ -131,35 +132,8 @@ class MovieInfoViewController: UIViewController {
         }
         bannerView.setScrollImages(banners)
         
-        textInfoView.titleLabel.text = movieInfo.title
-        if let rate = movieInfo.rating {
-            textInfoView.scoreLabel.text = "Score: \(rate)"
-        }
-        
-        if let lan = movieInfo.language{
-            textInfoView.languageLabel.text = "Language: " + lan
-        }
-        
-        let completion = {(name : String?) -> Void in
-            if name != nil {
-                self.textInfoView.genreLabel.text = "Genres: " + name!
-            }
-        }
-        DataContainer.sharedInstace.getGenreNamesFromId(self.movieInfo.genreIds, completion: completion)
-        
-        if let ct = movieInfo.country{
-            textInfoView.contryLabel.text = "Country: " + ct
-        }
-        if let cN = movieInfo.companyName{
-            textInfoView.companyLabel.text = "Company: " + cN
-        }
-        let tmp = movieInfo.overview
-        if tmp != nil && tmp != " "{
-            textInfoView.overviewLabel.text = tmp
-        }else{
-            textInfoView.overviewLabel.text = "Not Available."
-        }
-        
+        textInfoView.resetLabels(self.movieInfo)
+                
         let height = textInfoView.getViewHeight()
         textInfoView.frame = CGRectMake(0, textInfoView.frame.origin.y, scrollView.frame.size.width, height)
         scrollView.contentSize = CGSizeMake(scrollView.frame.size.width, CGRectGetMaxY(textInfoView.frame))
