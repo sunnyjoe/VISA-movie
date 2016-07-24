@@ -8,7 +8,11 @@ You can search by genre or year.
 
 
 Frameworks used.
-AFNetworking for API request
-SDWebImage for cache images
-Carography for auto layout UI frames
+
+AFNetworking for API request. 
+
+SDWebImage for cache images. 
+
+Carography for auto layout UI frames. 
+
 youtube-ios-player-helper for embed yotube videos inside the iOS views.
